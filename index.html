@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
+  <div style="display: inline-block; text-align: center; position: absolute; top: 3em;">
+    <input type="text" id="impact-text" placeholder="影響程度" value="低">
+    <input type="text" id="impact-color" placeholder="色碼，如#cccccc" value="#7ab0ca">
+  </div>
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%"
    height="100%" viewBox="0 0 2000 1125" style="enable-background:new 0 0 2000 1125;" xml:space="preserve" id="svg-tag">
   <style type="text/css">
@@ -475,7 +479,7 @@
       <text transform="matrix(1 0 0 1 1645.623 338.7261)"><tspan x="0" y="0" class="st11 st19 st18">幾乎</tspan><tspan x="0" y="20.1" class="st11 st19 st18">確定</tspan></text>
       <text transform="matrix(1 0 0 1 1756.127 347.9448)" class="st11 st19 st18">收斂中</text>
       <text transform="matrix(1 0 0 1 1872.1074 347.9448)" class="st11 st19 st18">發散中</text>
-      <text transform="matrix(0.9945 0 -0.1045 0.9945 1477.9609 91.4341)" class="st2 st19 st6">芙蓉(Chaba)</text>
+      <text transform="matrix(0.9945 0 -0.1045 0.9945 1477.9609 91.4341)" class="">芙蓉(Chaba)</text>
     </g>
   </g>
   <g id="path">
@@ -527,6 +531,14 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.4.3/velocity.min.js"></script>
 <script src="jquery.sticky.js"></script>
 <script>
+
+$('#impact-text').on('input', function () {
+  $('.st9.st19.st5').html($(this).val());
+});
+
+$('#impact-color').on('input', function () {
+  $('.st0').css('fill', $(this).val());
+});
 
 var calcLength = function (target) {
   var totalLength = 0;
