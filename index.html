@@ -436,7 +436,7 @@
         C742.9,1111.2,737.1,1106.1,731.4,1110.1"/>
     </g>
   </g>
-  <g id="Information">
+  <g id="information" style="display: none;">
     <g>
       <rect x="1468.2" y="34.5" class="st13" width="492.4" height="265.9"/>
       <rect x="1468.2" y="309.2" class="st13" width="492.4" height="95.7"/>
@@ -495,9 +495,9 @@
     </g>
   </g>
   <g id="rectangle">
-    <rect id="rectangle5" x="1350.6" y="960" class="st4 day" width="96.1" height="94" style="display: none;"/>
-    <rect id="rectangle4" x="1180.9" y="852" class="st4 day" width="96.1" height="136.5" style="display: none;"/>
-    <rect id="rectangle3" x="988.5" y="696.5" class="st4 day" width="115.9" height="155.5" style="display: none;"/>
+    <rect id="rectangle5" x="1350.6" y="960" class="st4 day" width="96.1" height="94" style="display: none;" />
+    <rect id="rectangle4" x="1180.9" y="852" class="st4 day" width="96.1" height="136.5" style="display: none;" />
+    <rect id="rectangle3" x="988.5" y="696.5" class="st4 day" width="115.9" height="155.5" style="display: none;" />
     <polygon id="rectangle2" class="st4 day" points="1057,546.6 851.7,613.8 805.3,472.3 1010.6,405  " style="display: none;"/>
     <polygon id="rectangle1" class="st4 day" points="1248.7,323.2 804.1,468 746.4,291 1191,146.2  " style="display: none;"/>
   </g>
@@ -505,11 +505,9 @@
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-          Weather
-      </a>
+      <a class="navbar-brand" href="#">Weather</a>
     </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li><a href="#">首頁</a></li>
       </ul>
@@ -546,7 +544,7 @@ $('.route').velocity(
     complete: function () {
       var delay = 0;
       $('.day').each(function () {
-        var $this = $(this)
+        var $this = $(this);
         delay += 300;
         setTimeout(function () {
           $this.velocity('fadeIn', {
@@ -555,6 +553,9 @@ $('.route').velocity(
           });
         }, delay);
       });
+      setTimeout(function () {
+        $('#information').velocity('fadeIn', {duration: 200});
+      }, 500);
     }
 });
 
