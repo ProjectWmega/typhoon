@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Document</title>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
@@ -527,13 +528,33 @@
 <script src="jquery.sticky.js"></script>
 <script>
 
+var calcLength = function (target) {
+  var totalLength = 0;
+  var prevPos;
+
+  if (target.getTotalLength) {
+    return target.getTotalLength();
+  }
+
+  for (var i = 0 ; i < target.points.numberOfItems; i++) {
+      var pos = target.points.getItem(i);
+      if (i > 0) {
+        totalLength += Math.sqrt(Math.pow((pos.x - prevPos.x), 2) + Math.pow((pos.y - prevPos.y), 2));
+      }
+      prevPos = pos;
+  }
+  return totalLength;
+}
+
 $('.navbar').sticky({topSpacing: 0});
 
-var routeLength = $('.route')[0].getTotalLength();
-$('.route').velocity({
-  'stroke-dasharray': routeLength,
-  'stroke-dashoffset': - routeLength
-}, 0);
+$('.route').each(function () {
+  var $this = $(this);
+  $this.velocity({
+    'stroke-dasharray': calcLength($this[0]),
+    'stroke-dashoffset': - calcLength($this[0])
+  }, 0);
+});
 
 $('.route').velocity(
   {
