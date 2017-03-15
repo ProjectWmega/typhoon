@@ -2,11 +2,200 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Document</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+  <style>
+    body {
+      font-size: 16px;
+    }
+
+    .navbar {
+      background: transparent;
+      border: none;
+    }
+
+    .navbar-default .navbar-nav > li > a,
+    .navbar-inverse .navbar-nav > li > a {
+      border: none;
+    }
+
+    .navbar-default .navbar-nav > li.active > a,
+    .navbar-inverse .navbar-nav > li.active > a {
+      border-top: 5px #00C9EA solid;
+    }
+
+    .section {
+
+    }
+
+    .section.hero {
+      padding: 3px;
+      background-color: rgba(255, 255, 255, .2);
+    }
+
+    .section > .content {
+      padding-left: 20px;
+    }
+
+    .section.special {
+      font-size: 30px;
+    }
+
+    .section.special .content-description {
+      display: inline;
+    }
+
+    .section.hero {
+      font-size: 40px;
+      margin-bottom: 200px;
+    }
+
+    .section .title {
+      border-left: 5px #00C9EA solid;
+      padding-left: 15px;
+    }
+
+    .section .title.title-alert {
+      border-left: 5px #DB0008 solid;
+    }
+
+    .aqi > .gauge > .dial {
+      stroke: #334455;
+      stroke-width: 100;
+    }
+    .aqi > .gauge > .value {
+      stroke: rgb(47, 227, 255);
+      stroke-width: 130;
+      stroke-dasharray: none;
+    }
+
+    .aqi > .gauge > .value-text {
+      fill: rgb(47, 227, 255);
+      font-family: sans-serif;
+      font-weight: bold;
+      font-size: 8em;
+    }
+  </style>
 </head>
 <body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <i class="fa fa-cloud" aria-hidden="true"></i> 天氣即時預報
+        </a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#">首頁</a></li>
+          <li><a href="#">預報</a></li>
+          <li><a href="#">觀測</a></li>
+          <li><a href="#">空氣</a></li>
+          <li><a href="#">科普園地</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <p>&nbsp;</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <div class="section hero">
+            <h3 class="title">天氣小叮嚀</h3>
+            <div class="content">逐漸回暖，水氣漸少</div>
+          </div>
+          <div class="section special">
+            <h3 class="title title-alert">目前警特報</h3>
+            <div class="row content">
+              <div class="col-md-6">
+                <i class="content-icon fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <p class="content-description">大雨特報</p>
+              </div>
+              <div class="col-md-6">
+                <i class="content-icon fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <p class="content-description">濃霧特報</p>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <h3 class="title">目前天氣</h3>
+            <p style="font-size: 40px">20℃</p>
+          </div>
+          <div class="section">
+            <h3 class="title">今日天氣預報</h3>
+            <canvas class="forecast-chart"></canvas>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <img src="img/tw.png" alt="" style="height: 250px; margin-bottom: 5em;">
+          <div class="section row">
+            <h3 class="title col-md-12">目前空氣品質及預報</h3>
+            <div class="aqi">
+              <div class="col-md-5" id="aqi-gauge"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="//cdn.jsdelivr.net/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <script src="//cdn.jsdelivr.net/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/raphael/2.1.4/raphael-min.js" integrity="sha256-Gk+dzc4kV2rqAZMkyy3gcfW6Xd66BhGYjVWa/FjPu+s=" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/justgage/1.0.1/justgage.min.js" integrity="sha256-4TgquKEwzEbLHJll6KN7ggZaS0/nj2lcAts2CK2soHc=" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/momentjs/2.17.1/moment.min.js" integrity="sha256-Gn7MUQono8LUxTfRA0WZzJgTua52Udm1Ifrk5421zkA=" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/chart.js/2.2.1/Chart.min.js" integrity="sha256-96SjD/5fFjCZksYnx7rsLj/nZziuwzgCON0164tNEZ4=" crossorigin="anonymous"></script>
+  <script>
+    var g = new JustGage({
+      id: 'aqi-gauge',
+      gaugeColor: 'transparent',
+      value: 327,
+      valueFontColor: '#fff',
+      min: 0,
+      max: 500,
+      levelColors: ['#fff'],
+      title: 'AQI',
+      label: '非常不健康',
+      labelMinFontSize: 14
+    });
+
+    setInterval(function () {
+      g.refresh(getRandomInt(0, 500));
+    }, 2000);
+
+    Chart.defaults.global.tooltips.enabled = false;
+
+    Chart.Line($('.forecast-chart'), {
+      data: {
+        datasets: [{
+          pointBorderWidth: 10,
+          borderColor: '#ccc',
+          fill: false,
+          pointStyle: 'circle',
+          lineTension: 0.2,
+          label: '氣溫走勢',
+          data: [
+            {x: 0, y: 15},
+            {x: 1, y: 20},
+            {x: 2, y: 18},
+            {x: 3, y: 18},
+            {x: 4, y: 18},
+            {x: 5, y: 18}
+          ]
+        }]
+      },
+      options: {
+        scales: {
+          gridLines: false,
+          xAxes: [{
+            type: 'time',
+            position: 'bottom'
+          }]
+        }
+      }
+    });
+  </script>
 </body>
 </html>
