@@ -5,8 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Document</title>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    .navbar-default {
+      background-color: rgba(255, 255, 255, .3);
+      border-color: transparent;
+      z-index: 10;
+    }
+
+    .navbar .logo {
+      height: 50px;
+      padding: 6px;
+    }
+
+    .navbar .nav li a {
+      color: #000;
+      font-size: 18px;
+    }
+    
+    .navbar .nav li:hover {
+      border-top: 5px #00bcdb solid;
+    }
+
+    .navbar .nav li a:hover {
+      color: #00bcdb;
+    }
+
+    svg {
+      position: absolute;
+      top: -50px;
+      height: calc(100% + 50px);
+    }
+  </style>
 </head>
-<svg viewBox="0 0 1600 900" style="width: 100%">
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <img src="img/logo.png" class="logo">
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        <li><a href="#">首頁</a></li>
+        <li><a href="#">預報</a></li>
+        <li><a href="#">觀測</a></li>
+        <li><a href="#">空氣</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<svg viewBox="0 0 1600 900">
   <style>
   .st0 {
     fill: #7AB0CA;
@@ -306,27 +352,6 @@
   </g>
 </svg>
 
-
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Weather</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="#">首頁</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1 style="height: 500px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta labore totam, ipsum fugit suscipit quisquam perspiciatis minus, nihil voluptates, reprehenderit dolore quod inventore quia quis culpa hic natus optio porro.</h1>
-      <h1 style="height: 500px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis architecto cumque, assumenda! Nostrum officiis quo dignissimos itaque a atque voluptatem, omnis praesentium aperiam deserunt qui eius impedit rem minima libero.</h1>
-    </div>
-  </div>
-</div>
 <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//cdn.jsdelivr.net/velocity/1.5.0/velocity.min.js" integrity="sha256-/IeNFU9g1Tnj9pOKq3jGgIU2/kiKS+t1Q7pwym7mpoA=" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/velocity/1.5.0/velocity.ui.min.js" integrity="sha256-sy9XDO27Le9UKdsCaEwGdSqPWH2KCljZoREdFiuz14E=" crossorigin="anonymous"></script>
@@ -381,7 +406,10 @@ $('.route path')
   $('.route .' + country).css('stroke-width', '3');
 })
 
-$('.navbar').sticky({topSpacing: 0});
+$('.navbar').sticky({
+  topSpacing: 0,
+  zIndex: 10
+});
 $('.info, .point').hide();
 
 var animationSequence = [];
