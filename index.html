@@ -30,6 +30,9 @@
       color: #00bcdb;
     }
 
+    .city g {
+      display: none;
+    }
     svg {
       position: absolute;
       top: -50px;
@@ -63,7 +66,7 @@
     stroke-width: 3;
     stroke-miterlimit: 10;
   }
-  .st2 {
+  .brown {
     fill: #4E4D4D;
   }
   .st3 {
@@ -90,7 +93,7 @@
   .st7 {
     fill: #F1EDE3;
   }
-  .st8 {
+  .yellow.transparent {
     opacity: 0.3;
     fill: #D9D235;
   }
@@ -115,20 +118,20 @@
   .st13 {
     fill: #C795A2;
   }
-  .st14 {
+  .white {
     fill: #FFFFFF;
   }
-  .st15 {
+  .red.transparent {
     opacity: 0.3;
     fill: #AB6866;
   }
-  .st16 {
+  .green {
     fill: #6B9871;
   }
-  .st18 {
+  .yellow {
     fill: #D2B86F;
   }
-  .st19 {
+  .grey-white {
     fill: #D3D3D4;
   }
   .st20 {
@@ -137,10 +140,10 @@
     stroke-width: 3;
     stroke-miterlimit: 10;
   }
-  .st21 {
+  .font.small {
     font-size: 14px;
   }
-  .st22 {
+  .font.large {
     font-size: 19px;
   }
   .st23 {
@@ -186,8 +189,11 @@
     stroke-width: 3;
     stroke-miterlimit: 10;
   }
-  .st32 {
-    fill: #79AECA;
+  .city-name {
+    opacity: 0.8;
+    fill: none;
+    stroke: #fff;
+    stroke-miterlimit: 10;
   }
   </style>
   <g id="map">
@@ -202,6 +208,133 @@
     <path d="M457.7 704.7l-1.3-.6-1-1-1.4-1-1 .5-.4 1.2-.3 5 .2 1 1 1.5 1.2 1 .5 1 .3.8 1 10 .6 2.2 1.2 2.7.8 2.7.2 3.4 1 3.2 1.3 1.2 1.8-.2 1 .4.7 2.7 2 1.8.7 3 1 1 1.4.3h1.6l.8-1-.2-2.8-.8-4.2.8-2.8 1.4 1.5 1.7 1 2.3.5 2 1 1.3 1.8.2 2-.8 1.7-5.6 5-1 1-.8 1.4v4.7l.5 4.8 2.3-2.3 2.7.4 2.2 3h1.8l2 2 2.8.8 3.4-.2 2.4-1.5.2-2 1.3-1 3.4-2 1-.4 1.3-.2 1 .2 7 3.6 3.2 3.4 4.2 3 .7.8 2.2 3.2.4 1.2v1.3l2 1.7 2-1.4-.3-3.5-1.4-3-.3-1-2.2-2.4v-2.6l-.3-1.4-.6-1.6.3-1h1.4l1.3.5 4.5 4.2 2 3 .8.5 6.4 3.7.7 1 .4 1 2 3.5v2.8l.5 1.4 2.2.3 5.5 3 2.6.3 1.6-.3 1.5-.5 1.3-.3.7.5-1.2 2.7-.5 2.8 2 2.3 2.5.7 1.8-5.5v-6l-.8.3h-.8L554 781l-2-.4-2.2.2.7-2v-2l-1.2-2-1.5-2-2.3-2.2-1.4-3 1.5-1.3 4.8-.4 1.2-2-1-1-2-1-1.2-.5H546l-4.8-1.6-1.3-1.7-1.5-.8-1 1-.5 1 1.2 1-.2 2.5-1.6 2.2h-3.2l-1-1v-1.4l.3-1.4V760l-1.4-3-1.8-2.6-2-1.5-2.2-1-3.3-.7h-3.3l-2.5 1.3-2.6 1.8-1 .3-1 .7v1l1.8 1.5.3 1-1.4.5-.3 1.2H510l-1.5-.4-4-1.8-1.5-1-1.3-1.3-.8-1.3-.5-1.7-2.5-6-.5-2.5v-2.5l1.7-1.3-.3-.7-.7-.6-2.8-5-2.6-5.5-1-1.2-.2-1.4.5-1.2 1-1 1-2.3 2-2.7.7-1.2v-1.3l-.4-1.3-.7-1 .8-2.8 2-2 2.6-1.5 4.5-2 3.8-.6 2-4 .2-2 5-9.7 1-4 .7-1.8.4-1.7-1-.8-1.6-.6-.3-1.5v-1.7l-.7-1-2.2-1.2-.7-1-1.5-3.5-.5-2v-2.3l.6-7.7 1-2.3 1.7-2 .5-2-.4-2-.8-1.4-1-1-2 .3-1.6 2.8-1 1-2 1.2-2.6-.3-3-.8-3-1.2-8.3-4.7-3.7-1.2h-1.2l-3 .7-1.5-.2H478l-2.5 1.3-2.7 1-.3 3.5-1 2.6-1 2.6-3.5 13 .3 2.5 1.4 2.5v1.5l-.3 2.7.3 4.4-.3 3.4-2 4.8-.5 3v2.8l.5 3 1.5 4.5v1.5l-.5 1.3-.7 1-1.6.4H462l-1-.3-2-3zM507.6 362.3l1 .3 2 1.7v-1l-1.2-2.2-1.3.4z" class="st23"/>
     <path d="M505.5 755.2l5.2 3.6v-1l-5-4.3-.5.5v.6zM504.4 742.7l.5.3 1.3-.2.8-2.3-1.2-3.3 1.2-1.8.3-.2h.5l-.4-.8-1.5-1-3.3.2-.5 1.8 1 1.2.7 2 .7.8.3 1.6-.3.5zM550.8 503.5l1.5-.4 1-1v-1l-4-1.3-.3.6v1l-1.8 1v.6h1.7z" class="st23"/>
   </g>
+  <g class="city">
+    <g>
+      <circle class="st31" cx="316.1" cy="545" r="6.4"/>
+      <rect x="328.2" y="536.7" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 332.2988 549.1211)" class="green font small city-name">香港</text>
+    </g>
+    <g>
+      <circle class="st31" cx="93.4" cy="792.1" r="6.4"/>
+      <rect x="105.5" y="783.8" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 109.6055 796.166)" class="green font small city-name">金邊</text>
+    </g>
+    <g>
+      <circle class="st31" cx="135.8" cy="824" r="6.4"/>
+      <rect x="147.9" y="815.7" class="st26" width="64" height="18"/>
+      <text transform="matrix(1 0 0 1 152.02 828.1289)" class="green font small city-name">胡志明市</text>
+    </g>
+    <g>
+      <circle class="st31" cx="476.4" cy="740.4" r="6.4"/>
+      <rect x="488.5" y="732.1" class="st26" width="51" height="18"/>
+      <text transform="matrix(1 0 0 1 492.5747 744.499)" class="green font small city-name">馬尼拉</text>
+    </g>
+    <g>
+      <circle class="st31" cx="709.2" cy="260.5" r="6.4"/>
+      <rect x="721.3" y="252.2" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 725.4199 264.5957)" class="green font small city-name">福岡</text>
+    </g>
+    <g>
+      <circle class="st31" cx="714.7" cy="282.5" r="6.4"/>
+      <rect x="726.8" y="274.2" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 730.8926 286.5957)" class="green font small city-name">熊本</text>
+    </g>
+    <g>
+      <circle class="st31" cx="831.9" cy="234.6" r="6.4"/>
+      <rect x="843.9" y="226.3" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 848.042 238.6597)" class="green font small city-name">大阪</text>
+    </g>
+    <g>
+      <circle class="st31" cx="837.3" cy="218.5" r="6.4"/>
+      <rect x="821.1" y="191.3" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 825.2256 203.6729)" class="green font small city-name">京都</text>
+    </g>
+    <g>
+      <circle class="st31" cx="815.7" cy="232.8" r="6.4"/>
+      <rect x="773.1" y="224.5" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 777.2461 236.9033)" class="green font small city-name">神戶</text>
+    </g>
+    <g>
+      <circle class="st31" cx="938.2" cy="203.8" r="6.4"/>
+      <rect x="950.2" y="195.5" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 954.3701 207.8838)" class="green font small city-name">東京</text>
+    </g>
+    <g>
+      <circle class="st31" cx="917.9" cy="144" r="6.4"/>
+      <rect x="930" y="135.7" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 934.0781 148.0571)" class="green font small city-name">新瀉</text>
+    </g>
+    <g>
+      <circle class="st31" cx="964.8" cy="126.2" r="6.4"/>
+      <rect x="976.8" y="117.9" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 980.9404 130.3359)" class="green font small city-name">仙台</text>
+    </g>
+    <g>
+      <circle class="st31" cx="905.3" cy="223.5" r="6.4"/>
+      <rect x="917.4" y="215.2" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 921.5127 227.5776)" class="green font small city-name">靜岡</text>
+    </g>
+    <g>
+      <circle class="st31" cx="631.6" cy="154.6" r="6.4"/>
+      <rect x="643.7" y="146.3" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 647.7935 158.6885)" class="green font small city-name">首爾</text>
+    </g>
+    <g>
+      <circle class="st31" cx="600.1" cy="109" r="6.4"/>
+      <rect x="612.1" y="100.7" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 616.248 113.0967)" class="green font small city-name">平壤</text>
+    </g>
+    <g>
+      <circle class="st31" cx="493.3" cy="486" r="6.4"/>
+      <rect x="505.4" y="477.7" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 509.5347 490.1182)" class="green font small city-name">台北</text>
+    </g>
+    <g>
+      <circle class="st31" cx="353" cy="88.1" r="6.4"/>
+      <rect x="365" y="79.8" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 369.1514 92.1924)" class="green font small city-name">北京</text>
+    </g>
+    <g>
+      <circle class="st31" cx="490.5" cy="327.5" r="6.4"/>
+      <rect x="502.6" y="319.2" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 506.6743 331.6436)" class="green font small city-name">上海</text>
+    </g>
+    <g>
+      <circle class="st31" cx="299.7" cy="552.4" r="6.4"/>
+      <rect x="255.3" y="545" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 259.4004 557.4287)" class="green font small city-name">澳門</text>
+    </g>
+    <g>
+      <circle class="st31" cx="292.3" cy="527" r="6.4"/>
+      <rect x="304.4" y="518.6" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 308.4849 531.0508)" class="green font small city-name">廣州</text>
+    </g>
+    <g>
+      <circle class="st31" cx="473.5" cy="508" r="6.4"/>
+      <rect x="485.6" y="499.6" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 489.7144 512.0479)" class="green font small city-name">台中</text>
+    </g>
+    <g>
+      <circle class="st31" cx="467.9" cy="545" r="6.4"/>
+      <rect x="480" y="536.7" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 484.1104 549.1211)" class="green font small city-name">高雄</text>
+    </g>
+    <g>
+      <circle class="st31" cx="104.1" cy="581.4" r="6.4"/>
+      <rect x="116.2" y="573.1" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 120.3062 585.4893)" class="green font small city-name">河內</text>
+    </g>
+    <g>
+      <circle class="st31" cx="652.1" cy="445.3" r="6.4"/>
+      <rect x="664.2" y="437" class="st26" width="37" height="18"/>
+      <text transform="matrix(1 0 0 1 668.3345 449.417)" class="green font small city-name">那霸</text>
+    </g>
+    <g>
+      <circle class="st31" cx="865.9" cy="214" r="6.4"/>
+      <rect x="875.6" y="191.3" class="st26" width="44.4" height="18"/>
+      <text transform="matrix(1 0 0 1 879.7637 203.6729)" class="green font small city-name">名古屋</text>
+    </g>
+  </g>
   <g class="day" data-data="1">
     <g class="route">
       <path class="cn st10" D="M1026.8 777L899 730.4" />
@@ -212,28 +345,28 @@
       <path class="usa st9" D="M1026.4 777L921 713" />
     </g>
     <g class="point">
-      <circle class="cwb st16" cx="894.2" cy="732.7" r="6.3"/>
+      <circle class="cwb green" cx="894.2" cy="732.7" r="6.3"/>
       <circle class="jp st12" cx="888" cy="737.1" r="6.3" />
-      <circle class="cn st18" cx="898.6" cy="730.3" r="6.3" />
+      <circle class="cn yellow" cx="898.6" cy="730.3" r="6.3" />
       <circle class="kp st24" cx="906" cy="723.2" r="6.3" />
       <circle class="hk st13" cx="913.5" cy="717.5" r="6.3" />
       <circle class="usa st0" cx="921" cy="712.8" r="6.3" />
     </g>
     <g class="info">
       <path id="d1_x5F_all" d="M868.5 689.7H942v69h-73.5z" class="st3"/>
-      <text id="afteroon" transform="translate(910.39 808.598)" class="st4 st21">
+      <text id="afteroon" transform="translate(910.39 808.598)" class="st4 font small">
         下午
       </text>
       <path id="date" d="M846.5 767.5h95V793h-95z" class="st0"/>
       <path id="week_x5F_color" d="M891.3 792.8H942v-25.3h-41z" class="st4"/>
-      <text id="date_x5F_number" transform="translate(849.214 787.038)" class="st14 st22">
+      <text id="date_x5F_number" transform="translate(849.214 787.038)" class="color white font large">
         12日
       </text>
-      <text id="week" transform="translate(904.46 787.038)" class="st14 st22">
+      <text id="week" transform="translate(904.46 787.038)" class="color white font large">
         (一)
       </text>
       <path id="med_x5F_color" d="M846.5 796h33.8v17.6h-33.8z" class="st12"/>
-      <text id="med" transform="matrix(.9945 0 -.1045 .9945 849.65 809.848)" class="st14 st21">
+      <text id="med" transform="matrix(.9945 0 -.1045 .9945 849.65 809.848)" class="color white font small">
         中度
       </text>
     </g>
@@ -248,28 +381,28 @@
       <path class="usa st9" d="M921 712.8l-121.8-84" />
     </g>
     <g class="point">
-      <circle class="cwb st16" cx="758.7" cy="670.4" r="6.3" />
+      <circle class="cwb green" cx="758.7" cy="670.4" r="6.3" />
       <circle class="jp st12" cx="755.4" cy="686.4" r="6.3" />
-      <circle class="cn st18" cx="763.4" cy="654" r="6.3" />
+      <circle class="cn yellow" cx="763.4" cy="654" r="6.3" />
       <circle class="kp st24" cx="777.8" cy="658.6" r="6.3" />
       <circle class="hk st13" cx="784.7" cy="645.8" r="6.3" />
       <circle class="usa st0" cx="800" cy="628.4" r="6.3" />
     </g>
     <g class="info">
       <path id="d1_x5F_all_1_" d="M723.2 613.7h94.5V700h-94.5z" class="st3"/>
-      <text id="afteroon_1_" transform="translate(765.106 749.657)" class="st4 st21">
+      <text id="afteroon_1_" transform="translate(765.106 749.657)" class="st4 font small">
         下午
       </text>
       <path id="date_1_" d="M701.2 708.6h95V734h-95z" class="st0"/>
       <path id="week_x5F_color_1_" d="M746 734h50.7v-25.4h-41z" class="st4"/>
-      <text id="date_x5F_number_1_" transform="translate(703.93 728.098)" class="st14 st22">
+      <text id="date_x5F_number_1_" transform="translate(703.93 728.098)" class="color white font large">
         12日
       </text>
-      <text id="week_1_" transform="translate(759.177 728.098)" class="st14 st22">
+      <text id="week_1_" transform="translate(759.177 728.098)" class="color white font large">
         (一)
       </text>
       <path id="med_x5F_color_1_" d="M701.2 737H735v17.7h-33.8z" class="st12"/>
-      <text id="med_1_" transform="matrix(.9945 0 -.1045 .9945 704.368 750.907)" class="st14 st21">
+      <text id="med_1_" transform="matrix(.9945 0 -.1045 .9945 704.368 750.907)" class="color white font small">
         中度
       </text>
     </g>
@@ -284,28 +417,28 @@
       <path class="usa st9" d="M800 628.8L677.5 490" />
     </g>
     <g class="point">
-      <circle class="cwb st16" cx="587.4" cy="557" r="6.3" />
+      <circle class="cwb green" cx="587.4" cy="557" r="6.3" />
       <circle class="jp st12" cx="574.7" cy="575.3" r="6.3" />
-      <circle class="cn st18" cx="595.1" cy="531.1" r="6.3" />
+      <circle class="cn yellow" cx="595.1" cy="531.1" r="6.3" />
       <circle class="kp st24" cx="618.5" cy="520.2" r="6.3" />
       <circle class="hk st13" cx="630" cy="503.5" r="6.3" />
       <circle class="usa st0" cx="677.5" cy="490" r="6.3" />
     </g>
     <g class="info">
       <path id="d1_x5F_all_2_" d="M539.3 474.3h162V602h-162z" class="st3"/>
-      <text id="afteroon_2_" transform="translate(581.208 651.773)" class="st4 st21">
+      <text id="afteroon_2_" transform="translate(581.208 651.773)" class="st4 font small">
         下午
       </text>
       <path id="date_2_" d="M517.3 610.7h95V636h-95z" class="st0"/>
       <path id="week_x5F_color_2_" d="M562 636H613v-25.3h-41z" class="st4"/>
-      <text id="date_x5F_number_2_" transform="translate(520.033 630.214)" class="st14 st11">
+      <text id="date_x5F_number_2_" transform="translate(520.033 630.214)" class="color white st11">
         12日
       </text>
-      <text id="week_2_" transform="translate(575.28 630.214)" class="st14 st11">
+      <text id="week_2_" transform="translate(575.28 630.214)" class="color white st11">
         (一)
       </text>
       <path id="med_x5F_color_2_" d="M517.3 639.2H551v17.6h-33.7z" class="st12"/>
-      <text id="med_2_" transform="matrix(.9945 0 -.1045 .9945 520.47 653.023)" class="st14 st21">
+      <text id="med_2_" transform="matrix(.9945 0 -.1045 .9945 520.47 653.023)" class="color white font small">
         中度
       </text>
     </g>
@@ -320,28 +453,28 @@
       <path class="usa st9" d="M677.5 490L517 309" />
     </g>
     <g class="point">
-      <circle class="cwb st16" cx="426.8" cy="376" r="6.3" />
+      <circle class="cwb green" cx="426.8" cy="376" r="6.3" />
       <circle class="jp st12" cx="414.1" cy="394.4" r="6.3" />
-      <circle class="cn st18" cx="434.5" cy="350.2" r="6.3" />
+      <circle class="cn yellow" cx="434.5" cy="350.2" r="6.3" />
       <circle class="kp st24" cx="457.9" cy="339.2" r="6.3" />
       <circle class="hk st13" cx="469.4" cy="322.5" r="6.3" />
       <circle class="usa st0" cx="516.9" cy="309" r="6.3" />
     </g>
     <g class="info">
       <path id="d1_x5F_all_3_" d="M368 292.8H538v115H368z" class="st3"/>
-      <text id="afteroon_3_" transform="translate(409.796 457.635)" class="st4 st21">
+      <text id="afteroon_3_" transform="translate(409.796 457.635)" class="st4 font small">
         下午
       </text>
       <path id="date_3_" d="M346 416.5h95V442h-95z" class="st0"/>
       <path id="week_x5F_color_3_" d="M390.7 442h50.6v-25.5h-41z" class="st4"/>
-      <text id="date_x5F_number_3_" transform="translate(348.62 436.076)" class="st14 st22">
+      <text id="date_x5F_number_3_" transform="translate(348.62 436.076)" class="color white font large">
         12日
       </text>
-      <text id="week_3_" transform="translate(403.866 436.076)" class="st14 st22">
+      <text id="week_3_" transform="translate(403.866 436.076)" class="color white font large">
         (一)
       </text>
       <path id="med_x5F_color_3_" d="M346 445h33.7v17.7H346z" class="st12"/>
-      <text id="med_3_" transform="matrix(.9945 0 -.1045 .9945 349.058 458.885)" class="st14 st21">
+      <text id="med_3_" transform="matrix(.9945 0 -.1045 .9945 349.058 458.885)" class="color white font small">
         中度
       </text>
     </g>
@@ -356,164 +489,37 @@
       <path class="usa st9" d="M517 309l-31.3-132" />
     </g>
     <g class="point">
-      <circle class="cwb st16" cx="374.1" cy="189.7" r="6.3" />
+      <circle class="cwb green" cx="374.1" cy="189.7" r="6.3" />
       <circle class="jp st12" cx="354" cy="199.3" r="6.3" />
-      <circle class="cn st18" cx="393.7" cy="171.2" r="6.3" />
+      <circle class="cn yellow" cx="393.7" cy="171.2" r="6.3" />
       <circle class="kp st24" cx="419.5" cy="173.5" r="6.3" />
       <circle class="hk st13" cx="437.8" cy="164.8" r="6.3" />
       <circle class="usa st0" cx="485.7" cy="176.9" r="6.3" />
     </g>
     <g class="info">
       <path id="d1_x5F_all_4_" d="M329 154.6h174v83H329z" class="st3"/>
-      <text id="afteroon_4_" transform="translate(322.24 285.996)" class="st4 st21">
+      <text id="afteroon_4_" transform="translate(322.24 285.996)" class="st4 font small">
         下午
       </text>
       <path id="date_4_" d="M258.3 245h95v25.3h-95z" class="st0"/>
       <path id="week_x5F_color_4_" d="M303 270.2H354V245h-41z" class="st4"/>
-      <text id="date_x5F_number_4_" transform="translate(261.064 264.437)" class="st7 st22">
+      <text id="date_x5F_number_4_" transform="translate(261.064 264.437)" class="st7 font large">
         12日
       </text>
-      <text id="week_4_" transform="translate(316.31 264.437)" class="st7 st22">
+      <text id="week_4_" transform="translate(316.31 264.437)" class="st7 font large">
         (一)
       </text>
       <path id="med_x5F_color_4_" d="M258.3 273.4H292V291h-33.7z" class="st12"/>
-      <text id="med_4_" transform="matrix(.9945 0 -.1045 .9945 261.5 287.246)" class="st7 st21">
+      <text id="med_4_" transform="matrix(.9945 0 -.1045 .9945 261.5 287.246)" class="st7 font small">
         中度
       </text>
     </g>
   </g>
   <g class="eye">
-    <circle cx="1026" cy="777" r="55" class="st8"></circle>
-    <circle cx="1026" cy="777" r="28" class="st15"></circle>
-    <circle cx="1026" cy="777" r="10" class="st19"></circle>
-    <circle cx="1026" cy="777" r="7" class="st2"></circle>
-  </g>
-  <g id="city">
-    <g>
-      <circle class="st31" cx="316.1" cy="545" r="6.4"/>
-      <rect x="328.2" y="536.7" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 332.2988 549.1211)" class="st16 st3 st21">香港</text>
-    </g>
-    <g>
-      <circle class="st31" cx="93.4" cy="792.1" r="6.4"/>
-      <rect x="105.5" y="783.8" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 109.6055 796.166)" class="st16 st3 st21">金邊</text>
-    </g>
-    <g>
-      <circle class="st31" cx="135.8" cy="824" r="6.4"/>
-      <rect x="147.9" y="815.7" class="st26" width="64" height="16.6"/>
-      <text transform="matrix(1 0 0 1 152.02 828.1289)" class="st16 st3 st21">胡志明市</text>
-    </g>
-    <g>
-      <circle class="st31" cx="476.4" cy="740.4" r="6.4"/>
-      <rect x="488.5" y="732.1" class="st26" width="51" height="16.6"/>
-      <text transform="matrix(1 0 0 1 492.5747 744.499)" class="st16 st3 st21">馬尼拉</text>
-    </g>
-    <g>
-      <circle class="st31" cx="709.2" cy="260.5" r="6.4"/>
-      <rect x="721.3" y="252.2" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 725.4199 264.5957)" class="st16 st3 st21">福岡</text>
-    </g>
-    <g>
-      <circle class="st31" cx="714.7" cy="282.5" r="6.4"/>
-      <rect x="726.8" y="274.2" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 730.8926 286.5957)" class="st16 st3 st21">熊本</text>
-    </g>
-    <g>
-      <circle class="st31" cx="831.9" cy="234.6" r="6.4"/>
-      <rect x="843.9" y="226.3" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 848.042 238.6597)" class="st16 st3 st21">大阪</text>
-    </g>
-    <g>
-      <circle class="st31" cx="837.3" cy="218.5" r="6.4"/>
-      <rect x="821.1" y="191.3" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 825.2256 203.6729)" class="st16 st3 st21">京都</text>
-    </g>
-    <g>
-      <circle class="st31" cx="815.7" cy="232.8" r="6.4"/>
-      <rect x="773.1" y="224.5" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 777.2461 236.9033)" class="st16 st3 st21">神戶</text>
-    </g>
-    <g>
-      <circle class="st31" cx="938.2" cy="203.8" r="6.4"/>
-      <rect x="950.2" y="195.5" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 954.3701 207.8838)" class="st16 st3 st21">東京</text>
-    </g>
-    <g>
-      <circle class="st31" cx="917.9" cy="144" r="6.4"/>
-      <rect x="930" y="135.7" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 934.0781 148.0571)" class="st16 st3 st21">新瀉</text>
-    </g>
-    <g>
-      <circle class="st31" cx="964.8" cy="126.2" r="6.4"/>
-      <rect x="976.8" y="117.9" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 980.9404 130.3359)" class="st16 st3 st21">仙台</text>
-    </g>
-    <g>
-      <circle class="st31" cx="905.3" cy="223.5" r="6.4"/>
-      <rect x="917.4" y="215.2" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 921.5127 227.5776)" class="st16 st3 st21">靜岡</text>
-    </g>
-    <g>
-      <circle class="st31" cx="631.6" cy="154.6" r="6.4"/>
-      <rect x="643.7" y="146.3" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 647.7935 158.6885)" class="st16 st3 st21">首爾</text>
-    </g>
-    <g>
-      <circle class="st31" cx="600.1" cy="109" r="6.4"/>
-      <rect x="612.1" y="100.7" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 616.248 113.0967)" class="st16 st3 st21">平壤</text>
-    </g>
-    <g>
-      <circle class="st31" cx="493.3" cy="486" r="6.4"/>
-      <rect x="505.4" y="477.7" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 509.5347 490.1182)" class="st16 st3 st21">台北</text>
-    </g>
-    <g>
-      <circle class="st31" cx="353" cy="88.1" r="6.4"/>
-      <rect x="365" y="79.8" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 369.1514 92.1924)" class="st16 st3 st21">北京</text>
-    </g>
-    <g>
-      <circle class="st31" cx="490.5" cy="327.5" r="6.4"/>
-      <rect x="502.6" y="319.2" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 506.6743 331.6436)" class="st16 st3 st21">上海</text>
-    </g>
-    <g>
-      <circle class="st31" cx="299.7" cy="552.4" r="6.4"/>
-      <rect x="255.3" y="545" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 259.4004 557.4287)" class="st16 st3 st21">澳門</text>
-    </g>
-    <g>
-      <circle class="st31" cx="292.3" cy="527" r="6.4"/>
-      <rect x="304.4" y="518.6" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 308.4849 531.0508)" class="st16 st3 st21">廣州</text>
-    </g>
-    <g>
-      <circle class="st31" cx="473.5" cy="508" r="6.4"/>
-      <rect x="485.6" y="499.6" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 489.7144 512.0479)" class="st16 st3 st21">台中</text>
-    </g>
-    <g>
-      <circle class="st31" cx="467.9" cy="545" r="6.4"/>
-      <rect x="480" y="536.7" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 484.1104 549.1211)" class="st16 st3 st21">高雄</text>
-    </g>
-    <g>
-      <circle class="st31" cx="104.1" cy="581.4" r="6.4"/>
-      <rect x="116.2" y="573.1" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 120.3062 585.4893)" class="st16 st3 st21">河內</text>
-    </g>
-    <g>
-      <circle class="st31" cx="652.1" cy="445.3" r="6.4"/>
-      <rect x="664.2" y="437" class="st26" width="37" height="16.6"/>
-      <text transform="matrix(1 0 0 1 668.3345 449.417)" class="st16 st3 st21">那霸</text>
-    </g>
-    <g>
-      <circle class="st31" cx="865.9" cy="214" r="6.4"/>
-      <rect x="875.6" y="191.3" class="st26" width="44.4" height="16.6"/>
-      <text transform="matrix(1 0 0 1 879.7637 203.6729)" class="st16 st3 st21">名古屋</text>
-    </g>
+    <circle cx="1026" cy="777" r="10" class="grey-white"></circle>
+    <circle cx="1026" cy="777" r="28" class="red transparent"></circle>
+    <circle cx="1026" cy="777" r="55" class="yellow transparent"></circle>
+    <circle cx="1026" cy="777" r="7" class="brown"></circle>
   </g>
 </svg>
 
@@ -576,8 +582,26 @@ $('.navbar').sticky({
   zIndex: 10
 });
 $('.info, .point').hide();
+$('.city g').hide();
 
 var animationSequence = [];
+
+animationSequence.push({
+    e: $('.city g'),
+    p: 'fadeIn',
+    o: {duration: 800}
+  });
+
+$('.eye circle').each(function () {
+  var $this = $(this);
+
+  $this.data('original-r', $this.attr('r')).attr('r', 0);
+  animationSequence.push({
+    e: $this,
+    p: {'r': $this.data('original-r')},
+    o: {duration: 300, easing: 'easeOutCubic'}
+  });
+});
 
 $('.day').each(function () {
   var $day = $(this);
