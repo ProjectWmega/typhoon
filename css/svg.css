@@ -1,0 +1,120 @@
+svg {
+  position: absolute;
+  top: -50px;
+  height: calc(100% + 50px);
+}
+.city g {
+  display: none;
+}
+
+/* General style */
+.brown {
+  fill: #4E4D4D;
+}
+.green {
+  fill: #6B9871;
+}
+.white {
+  fill: #FFFFFF;
+}
+.grey-white {
+  fill: #D3D3D4;
+}
+.yellow.transparent {
+  opacity: 0.3;
+  fill: #D9D235;
+}
+.red.transparent {
+  opacity: 0.3;
+  fill: #AB6866;
+}
+.font.small {
+  font-size: 13px;
+}
+.font.large {
+  font-size: 19px;
+}
+
+/* Country and city */
+.country {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #595757;
+}
+.city-point {
+  fill: #B4B4B5;
+  stroke: #717071;
+  stroke-width: 3;
+  stroke-miterlimit: 10;
+}
+.city-name {
+  opacity: 0.8;
+  fill: none;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+}
+.city-name-background {
+  fill: #717071;
+}
+
+/* Route */
+.route {
+  fill: none;
+  stroke-width: 3;
+  stroke-miterlimit: 10;
+}
+.route .hk {
+  stroke: #C795A2;
+}
+.route .kr {
+  stroke: #A76664;
+}
+.route .tw {
+  stroke: #6B9871;
+}
+.route .usa {
+  stroke: #7AB0CA;
+}
+.route .cn {
+  stroke: #D2B86F;
+}
+.route.jp {
+  stroke: #C69370;
+}
+
+/* Point of route */
+.point .usa {
+  fill: #7AB0CA;
+}
+.point .jp {
+  fill: #C69370;
+}
+.point .hk {
+  fill: #C795A2;
+}
+.point .kr {
+  fill: #A76664;
+}
+.point .cn {
+  fill: #D2B86F;
+}
+.point .tw {
+  fill: #6B9871;
+}
+
+/* Date of route */
+.date-border {
+  opacity: 0.5;
+  fill: none;
+  stroke: #546A7C;
+  stroke-miterlimit: 10;
+}
+.week-background {
+  fill: #546A7C;
+}
+.date-background {
+  fill: #7AB0CA;
+}
+.typhoon-level-background {
+  fill: #C69370;
+}
