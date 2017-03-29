@@ -30,6 +30,7 @@ svg {
 }
 .font.small {
   font-size: 14px;
+  font-weight: lighter;
 }
 .font.large {
   font-size: 19px;
