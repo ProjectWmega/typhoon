@@ -67,6 +67,18 @@
       -webkit-transform: translateY(0);
       transform: translateY(0);
     }
+    .route-selector {
+      width: 15vw;
+      height: 20vh;
+      position: fixed;
+      top: 15%;
+      z-index: 2;
+      background-color: rgba(0, 0, 0, .4);
+      color: #ccc;
+    }
+    button.route.active {
+      color: #000;
+    }
   </style>
 </head>
 <nav class="navbar navbar-default">
@@ -84,7 +96,16 @@
     </div>
   </div>
 </nav>
-<svg viewBox="0 0 1600 900">
+<div class="route-selector">
+  <h2>路徑選擇</h2>
+  <button class="route active" data-route="tw">CWB</button>
+  <button class="route active" data-route="cn">CMA</button>
+  <button class="route active" data-route="hk">HK</button>
+  <button class="route active" data-route="jp">JMA</button>
+  <button class="route active" data-route="usa">JTWC</button>
+  <button class="route active" data-route="kr">KMA</button>
+</div>
+<svg viewBox="0 0 1600 900" id="temp">
   <g id="map">
     <path d="M646.7 230.6l-1.2 1.3 1.2 1.2.3-.8zM652.8 445.5l2-.5 1-1.4 2.3-1.2 1.4-1.7.5-2.4-2-1.8-1 2.2-2.2 2.2-.5 1-1.3.7-.4-.2-1-.8-2-.3-.3.4v1.2l1.3 1-.5 1-2.5 2.2-.6.5-1.7.3v3.3l-1.8 2.8v2.8h1.8l1.8-1.5.2-.5-.5-1v-1.2l1.5-1.6 1.4-.2-1-1.4v-1.6l2-.3zM756 .8l4.4-.8h-4.2zM686.4 269l-.2.7-1 1.4h1l1.8-1 .4-1.8 1.5-2h-1l-1.7.8z" class="country"/>
     <path d="M762.7 1h3.2l3.7 2.4 1.5-.4h1.7l1.4 2.4 2.5.8 4-2 6.2-1.8h3l5-2.4h-34.8zM649.4 229l1-.7 1 1.7 1.8-.2.3-2.6-.7-2-1.7-.4-1.2-.7-2 1.3.2 1.7.8 2zM605 862h1.8l.8-.8-1.2-1.6.2-.6v-1.3l-1.4-2.8-1.8 3-.2 2.3 1.4 1.8zM602.2 862.7l-.7 2.8.8 1.3.4-.6.6-2.2-.6-1.8zM695.4 255.8l-.5-2.2-1.5-.8-.4.8-.5 2.4 1.2 1zM695.3 309.4v-1.2l-2 1.8-.6 2 .8-.3zM680.6 245l.7 1.7 1.6-1 1.2-3v-1.4l-3-1zM782 189l.2-1-2-2.7-2.2 1.3-.4 1.7 1.2 1.4 2 .4zM722.5 154l.5-1.5-.8-.6-1.6.3-.6.8v1l1.4.8zM928.3 21.7l.6 2.2h1l.6-.5 1.2-4-1.5.3-1.5.8zM901 143.5l-1.4.7.5.3h2.5l3.6-2.3 2-4.6-3-.2.3-1.4 1.2-3.7-.2-1.6-1 .6-3.8 3.7-1.3 2.3v2.3h1.7v.7l-1 2zM605.3 224.2l-1.7 1.3 1 .8.6 1.5 1 2h1l.4-.6v-2.6zM31.2 808.2l1.3.5v-.6l-.5-.8-.8-1.2-1.4-1.6-1-.3v1l.6 3.3h1.4zM606 238.2l.7.3 1 1 1.4-.5 2.6-1.5 1-2-.8-1.2-2.4-.5-.5.8-2.6 2.4zM572.2 874.7l-1.4.4-.3 1.3.6 1 2.8 1.2.7-1.4-.4-1-1-1.3zM36 815.3l-.7.6-.3 1.2 1.4 1 .4-2.5zM47.4 825.2l-.2-2.6-.7.2-.3 1v1.3l.4.4h.4zM72.5 848l-.4-1-.8-1h-1l-2 1.4h-1.3l.3.8 2 2.3 1.7 5.2.7-.8-.2-1.3 1-2.8zM51.7 837.4v.6l1.4 2 1-1zM581.8 851l1 .8-.2-1 .2-1 2.6.2.3-1-.2-1-1.5-2.7-.2-3-.6-1.4-1-1.2-1-1-1.2-.7-.5-.7.7-4v-4.5l-.3-1.8-1-1-1.5-3-2.6-.6-2.5 2-2 .2-1.6-.8-.7-1.3-1-.7-1.7-.8-1.5-1.4-1-.5-.6 1.3.6 1.4.8 1.4 1.2 5.5.8 5.5 1.4.4 2.7-1.4h1l2 2 1 2.4.3 1.2v1.2l-1.4 6 1 2.6.2 1.3-.3 2.6.7.8 2.8 1 2.4 1.6-.2-2-.4-2-.5-4.2 1.3 1zM621.7 239.7l-1.3-1.4h-1.2v1.2l1 1.2 2 .3zM613.5 181.2l-.7-2.2-1.6-1.2.4 4 1.6 1zM609 269.8l.3.3 1 .4 1-.5 6.2-.5 3-1 4-1.8 1-1 .5-1.7-.7-2-3.4-1h-1.7l-8.7 2.5-3.3 2.5-1 1.5.5.8z" class="country"/>
@@ -437,6 +458,7 @@
 <script src="jquery.sticky.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/svg.js/2.5.0/svg.min.js" integrity="sha256-HiDQjKLue+05lQxJTtS7iS+KKlYFx3v4+/3qDz+aENQ=" crossorigin="anonymous"></script>
 <script src="//unpkg.com/draggabilly@2.1/dist/draggabilly.pkgd.min.js"></script>
+<script src="//cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js" integrity="sha256-IyWBFJYclFY8Pn32bwWdSHmV4B9M5mby5bhPHEmeY8w=" crossorigin="anonymous"></script>
 <script>
 // $.getJSON('data/route.json', function (data) {
 //   var draw = SVG('svg');
@@ -546,6 +568,22 @@ $('.day').each(function () {
 });
 
 $.Velocity.RunSequence(animationSequence);
+
+$('button.route').on('click', function () {
+  var $this = $(this);
+
+  if ($this.hasClass('active')) {
+    activeRoutes = _.remove(activeRoutes, function (activeRoute) {
+      return activeRoute !== ('.' + $this.data('route'));
+    });
+    $this.removeClass('active');
+  } else {
+    activeRoutes.push('.' + $this.data('route'));
+    $this.addClass('active');
+  }
+  $('.tw, .cn, .hk, .jp, .kr, .usa').hide();
+  $(activeRoutes.join(',')).show();
+});
 
 </script>
 </body>
