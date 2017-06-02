@@ -528,9 +528,8 @@
 <script src="jquery.sticky.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/svg.js/2.5.0/svg.min.js" integrity="sha256-HiDQjKLue+05lQxJTtS7iS+KKlYFx3v4+/3qDz+aENQ=" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js" integrity="sha256-IyWBFJYclFY8Pn32bwWdSHmV4B9M5mby5bhPHEmeY8w=" crossorigin="anonymous"></script>
+<script src="//unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
 <script>
-var activeRoutes = ['.tw', '.cn', '.hk', '.jp', '.kr', '.usa'];
-
 var calcLength = function (target) {
   var totalLength = 0;
   var prevPos;
@@ -548,6 +547,8 @@ var calcLength = function (target) {
   }
   return totalLength;
 }
+
+$('.draggable').draggabilly();
 
 $('.route path')
 .on('mouseenter', function () {
@@ -622,6 +623,7 @@ $.Velocity.RunSequence(animationSequence);
 
 $('.btn-route').on('click', function () {
   var $this = $(this);
+  var routes = [];
 
   if (['all', 'none', 'avg'].indexOf($this.data('route')) > -1) {
     if ($this.data('route') === 'all') {
@@ -640,17 +642,12 @@ $('.btn-route').on('click', function () {
     return;
   }
 
-  if ($this.hasClass('active')) {
-    activeRoutes = _.remove(activeRoutes, function (activeRoute) {
-      return activeRoute !== ('.' + $this.data('route'));
-    });
-    $this.removeClass('active');
-  } else {
-    activeRoutes.push('.' + $this.data('route'));
-    $this.addClass('active');
-  }
+  $this.toggleClass('active');
+  $('.btn-route.active').each(function () {
+    routes.push('.' + $(this).data('route'));
+  });
   $('.tw, .cn, .hk, .jp, .kr, .usa').hide();
-  $(activeRoutes.join(',')).show();
+  $(routes.join(',')).show();
 });
 
 </script>
