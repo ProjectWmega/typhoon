@@ -36,6 +36,24 @@ svg {
   font-size: 19px;
 }
 
+/* Grid line */
+
+.latitude-line {
+  fill: none;
+  stroke: #717071;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 8.005, 8.005;
+}
+.longitude-line {
+  fill: none;
+  stroke: #717071;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 8.036, 8.036;
+}
+.grid-mark-background {
+  fill: #717071;
+}
+
 /* Country and city */
 .country {
   fill-rule: evenodd;
