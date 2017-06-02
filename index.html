@@ -68,15 +68,53 @@
       transform: translateY(0);
     }
     .route-selector {
-      width: 15vw;
-      height: 20vh;
+      padding: 1em;
       position: fixed;
-      top: 15%;
+      top: 10%;
       z-index: 2;
-      background-color: rgba(0, 0, 0, .4);
+      background-color: #6f7070;
       color: #ccc;
     }
-    button.route.active {
+    .multi-select .route {
+      display: inline-block;
+      width: 40%;
+    }
+    .route span {
+      vertical-align: text-bottom;
+    }
+    .route-selector .title {
+      color: #fff;
+    }
+    .route-selector .route {
+      margin: 5px 0;
+    }
+    .route-selector .btn-route {
+      width: 1.5em;
+      height: 1.5em;
+      padding: 0;
+      border: 2px #eee solid;
+      background-color: #fff;
+      outline: none;
+    }
+    .route-selector .btn-route.active[data-route=hk] {
+      background-color: #d192a0;
+    }
+    .route-selector .btn-route.active[data-route=kr] {
+      background-color: #b16262;
+    }
+    .route-selector .btn-route.active[data-route=jp] {
+      background-color: #cf916c;
+    }
+    .route-selector .btn-route.active[data-route=cn] {
+      background-color: #d4b868;
+    }
+    .route-selector .btn-route.active[data-route=tw] {
+      background-color: #579c90;
+    }
+    .route-selector .btn-route.active[data-route=usa] {
+      background-color: #6cafcd;
+    }
+    .route-selector .btn-route.active {
       color: #000;
     }
   </style>
@@ -97,13 +135,46 @@
   </div>
 </nav>
 <div class="route-selector">
-  <h2>路徑選擇</h2>
-  <button class="route active" data-route="tw">CWB</button>
-  <button class="route active" data-route="cn">CMA</button>
-  <button class="route active" data-route="hk">HK</button>
-  <button class="route active" data-route="jp">JMA</button>
-  <button class="route active" data-route="usa">JTWC</button>
-  <button class="route active" data-route="kr">KMA</button>
+  <h4 class="title">各國颱風預測路徑選擇</h4>
+  <div class="multi-select">
+    <div class="route">
+      <button class="btn-route" data-route="all"></button>
+      <span>全選</span>
+    </div>
+    <div class="route">
+      <button class="btn-route" data-route="none"></button>
+      <span>全不選</span>
+    </div>
+  </div>
+  <div class="route">
+    <button class="btn-route" data-route="avg"></button>
+    <span>各國平均路徑</span>
+  </div>
+  <hr>
+  <div class="route">
+    <button class="btn-route active" data-route="tw"></button>
+    <span>中央氣象局 (CWB)</span>
+  </div>
+  <div class="route">
+    <button class="btn-route active" data-route="cn"></button>
+    <span>中國氣象局 (CMA)</span>
+  </div>
+  <div class="route">
+    <button class="btn-route active" data-route="hk"></button>
+    <span>香港天文台 (HK)</span>
+  </div>
+  <div class="route">
+    <button class="btn-route active" data-route="jp"></button>
+    <span>日本氣象廳 (JMA)</span>
+  </div>
+  <div class="route">
+    <button class="btn-route active" data-route="usa"></button>
+    <span>美軍聯合颱風警報中心 (JTWC)</span>
+  </div>
+  <div class="route">
+    <button class="btn-route active" data-route="kr"></button>
+    <span>大韓民國氣象廳 (KMA)</span>
+  </div>
 </div>
 <svg viewBox="0 0 1600 900" id="temp">
   <g id="map">
@@ -451,34 +522,14 @@
     <circle cx="1026" cy="777" r="7" class="brown"></circle>
   </g>
 </svg>
-
 <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//cdn.jsdelivr.net/velocity/1.5.0/velocity.min.js" integrity="sha256-/IeNFU9g1Tnj9pOKq3jGgIU2/kiKS+t1Q7pwym7mpoA=" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/velocity/1.5.0/velocity.ui.min.js" integrity="sha256-sy9XDO27Le9UKdsCaEwGdSqPWH2KCljZoREdFiuz14E=" crossorigin="anonymous"></script>
 <script src="jquery.sticky.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/svg.js/2.5.0/svg.min.js" integrity="sha256-HiDQjKLue+05lQxJTtS7iS+KKlYFx3v4+/3qDz+aENQ=" crossorigin="anonymous"></script>
-<script src="//unpkg.com/draggabilly@2.1/dist/draggabilly.pkgd.min.js"></script>
 <script src="//cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js" integrity="sha256-IyWBFJYclFY8Pn32bwWdSHmV4B9M5mby5bhPHEmeY8w=" crossorigin="anonymous"></script>
 <script>
-// $.getJSON('data/route.json', function (data) {
-//   var draw = SVG('svg');
-//   var lines = [];
-//   var TILE_SIZE = 256;
-//   function project(latLng) {
-//     var siny = Math.sin(latLng[0] * Math.PI / 180);
-//     siny = Math.min(Math.max(siny, -0.9999), 0.9999);
-
-//     return new google.maps.Point(
-//       TILE_SIZE * (0.5 + latLng[1] / 360),
-//       TILE_SIZE * (0.5 - Math.log((1 + siny) / (1 - siny)) / (4 * Math.PI)));
-//   }
-
-//   $.each(data.points, function (ind, point) {
-//     data.points[ind][0] = Math.pow(data.points[ind][0], data.ratio.x);
-//     data.points[ind][1] = Math.pow(data.points[ind][1], data.ratio.y);
-//   });
-//   var polyline = draw.polyline(data.points).fill('none').stroke({ width: 5 });
-// });
+var activeRoutes = ['.tw', '.cn', '.hk', '.jp', '.kr', '.usa'];
 
 var calcLength = function (target) {
   var totalLength = 0;
@@ -489,11 +540,11 @@ var calcLength = function (target) {
   }
 
   for (var i = 0 ; i < target.points.numberOfItems; i++) {
-      var pos = target.points.getItem(i);
-      if (i > 0) {
-        totalLength += Math.sqrt(Math.pow((pos.x - prevPos.x), 2) + Math.pow((pos.y - prevPos.y), 2));
-      }
-      prevPos = pos;
+    var pos = target.points.getItem(i);
+    if (i > 0) {
+      totalLength += Math.sqrt(Math.pow((pos.x - prevPos.x), 2) + Math.pow((pos.y - prevPos.y), 2));
+    }
+    prevPos = pos;
   }
   return totalLength;
 }
@@ -569,8 +620,25 @@ $('.day').each(function () {
 
 $.Velocity.RunSequence(animationSequence);
 
-$('button.route').on('click', function () {
+$('.btn-route').on('click', function () {
   var $this = $(this);
+
+  if (['all', 'none', 'avg'].indexOf($this.data('route')) > -1) {
+    if ($this.data('route') === 'all') {
+      $('.btn-route').addClass('active');
+      $('.tw, .cn, .hk, .jp, .kr, .usa').show();
+    }
+    if ($this.data('route') === 'none') {
+      $('.btn-route').removeClass('active');
+      $('.tw, .cn, .hk, .jp, .kr, .usa').hide();
+    }
+    if ($this.data('route') === 'avg') {
+      $('.btn-route').removeClass('active');
+      $('.tw, .cn, .hk, .jp, .kr, .usa').hide();
+      $('.avg').show();
+    }
+    return;
+  }
 
   if ($this.hasClass('active')) {
     activeRoutes = _.remove(activeRoutes, function (activeRoute) {
