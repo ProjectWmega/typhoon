@@ -4,130 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Document</title>
-  <link rel="stylesheet" href="css/svg.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <style>
-    .navbar-default {
-      background-color: rgba(255, 255, 255, .3);
-      border-color: transparent;
-      z-index: 10;
-    }
-
-    .navbar .logo {
-      height: 50px;
-      padding: 6px;
-    }
-
-    .navbar .nav li a {
-      color: #000;
-      font-size: 18px;
-      background-color: initial !important;
-    }
-
-    .navbar .nav li.active a,
-    .navbar .nav li.active:hover a {
-      color: #00bcdb;
-    }
-
-    .navbar .nav li {
-      border-top: 5px transparent solid;
-    }
-
-    .navbar .nav li {
-      display: inline-block;
-      vertical-align: middle;
-      -webkit-transform: perspective(1px) translateZ(0);
-      transform: perspective(1px) translateZ(0);
-      box-shadow: 0 0 1px transparent;
-      position: relative;
-      overflow: hidden;
-    }
-    .navbar .nav li:before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      left: 0;
-      right: 0;
-      top: 0;
-      background: #00bcdb;
-      height: 4px;
-      -webkit-transform: translateY(-4px);
-      transform: translateY(-4px);
-      -webkit-transition-property: transform;
-      transition-property: transform;
-      -webkit-transition-duration: 0.3s;
-      transition-duration: 0.3s;
-      -webkit-transition-timing-function: ease-out;
-      transition-timing-function: ease-out;
-    }
-    .navbar .nav li.active:before,
-    .navbar .nav li:hover:before,
-    .navbar .nav li:focus:before,
-    .navbar .nav li:active:before {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-    }
-    .route-selector {
-      padding: 1em;
-      position: fixed;
-      top: 10%;
-      left: 2%;
-      z-index: 2;
-      font-size: .8em;
-      background-color: #6f7070;
-      color: #ccc;
-      cursor: move;
-    }
-    .multi-select .route,
-    .multi-select .info {
-      display: inline-block !important;
-      width: 40%;
-    }
-    .route span,
-    .info span {
-      vertical-align: text-bottom;
-    }
-    .route-selector .title {
-      color: #fff;
-    }
-    .route-selector .route,
-    .route-selector .info {
-      margin: 5px 0;
-    }
-    .route-selector .btn-route,
-    .route-selector .btn-toggle {
-      width: 1.5em;
-      height: 1.5em;
-      padding: 0;
-      border: 2px #eee solid;
-      background-color: #fff;
-      outline: none;
-    }
-    .route-selector .btn-route.active[data-route=avg] {
-      background-color: #536b7d;
-    }
-    .route-selector .btn-route.active[data-route=hk] {
-      background-color: #d192a0;
-    }
-    .route-selector .btn-route.active[data-route=kr] {
-      background-color: #b16262;
-    }
-    .route-selector .btn-route.active[data-route=jp] {
-      background-color: #cf916c;
-    }
-    .route-selector .btn-route.active[data-route=cn] {
-      background-color: #d4b868;
-    }
-    .route-selector .btn-route.active[data-route=tw] {
-      background-color: #579c90;
-    }
-    .route-selector .btn-route.active[data-route=usa] {
-      background-color: #6cafcd;
-    }
-    .route-selector .btn-route.active {
-      color: #000;
-    }
-  </style>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/svg.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <nav class="navbar navbar-default">
   <div class="container">
@@ -149,55 +29,81 @@
   <div class="multi-select">
     <div class="route">
       <button class="btn-route" data-route="all"></button>
-      <span>全選</span>
+      <span class="setting-label">全選</span>
     </div>
     <div class="route">
       <button class="btn-route" data-route="none"></button>
-      <span>全不選</span>
+      <span class="setting-label">全不選</span>
     </div>
   </div>
   <div class="route">
     <button class="btn-route active" data-route="avg"></button>
-    <span>各國平均路徑</span>
+    <span class="setting-label">各國平均路徑</span>
   </div>
   <div class="route">
     <button class="btn-route active" data-route="tw"></button>
-    <span>中央氣象局 (CWB)</span>
+    <span class="setting-label">中央氣象局 (CWB)</span>
   </div>
   <div class="route">
     <button class="btn-route active" data-route="cn"></button>
-    <span>中國氣象局 (CMA)</span>
+    <span class="setting-label">中國氣象局 (CMA)</span>
   </div>
   <div class="route">
     <button class="btn-route active" data-route="hk"></button>
-    <span>香港天文台 (HK)</span>
+    <span class="setting-label">香港天文台 (HK)</span>
   </div>
   <div class="route">
     <button class="btn-route active" data-route="jp"></button>
-    <span>日本氣象廳 (JMA)</span>
+    <span class="setting-label">日本氣象廳 (JMA)</span>
   </div>
   <div class="route">
     <button class="btn-route active" data-route="usa"></button>
-    <span>美軍聯合颱風警報中心 (JTWC)</span>
+    <span class="setting-label">美軍聯合颱風警報中心 (JTWC)</span>
   </div>
   <div class="route">
     <button class="btn-route active" data-route="kr"></button>
-    <span>大韓民國氣象廳 (KMA)</span>
+    <span class="setting-label">大韓民國氣象廳 (KMA)</span>
   </div>
   <hr>
   <h4 class="title">地圖資訊選擇</h4>
   <div class="multi-select">
     <div class="info">
       <button class="btn-toggle" data-toggle="city"></button>
-      <span>城市</span>
+      <span class="setting-label">城市</span>
     </div>
     <div class="info">
       <button class="btn-toggle" data-toggle="grid-line"></button>
-      <span>經緯度</span>
+      <span class="setting-label">經緯度</span>
     </div>
   </div>
 </div>
-<svg viewBox="0 0 1600 900" id="temp">
+<div class="info-box">
+  <div class="info-title">
+    <i class="fa fa-exclamation-triangle table-cell" aria-hidden="true"></i>
+    <div class="table-cell">
+      <h1 class="first-title">全台注意強風豪雨</h1>
+      <h4>下週二颱風可能襲擾</h4>
+    </div>
+  </div>
+  <div class="well">
+    <h1>莫蘭蒂</h1>
+  </div>
+  <div class="well">
+    <h2 class="table-cell second-title">颱風警報燈號</h2>
+    <div class="table-cell alert-box">
+      <h5 class="title">海上警報</h5>
+      <span class="status on">ON</span>
+    </div>
+    <div class="table-cell alert-box">
+      <h5 class="title">陸上警報</h5>
+      <span class="status off">OFF</span>
+    </div>
+  </div>
+  <div class="well">
+    <h2>各地概略影響</h2>
+  </div>
+</div>
+<svg viewBox="0 0 1600 900" id="main-svg">
   <g id="map">
     <path d="M646.7 230.6l-1.2 1.3 1.2 1.2.3-.8zM652.8 445.5l2-.5 1-1.4 2.3-1.2 1.4-1.7.5-2.4-2-1.8-1 2.2-2.2 2.2-.5 1-1.3.7-.4-.2-1-.8-2-.3-.3.4v1.2l1.3 1-.5 1-2.5 2.2-.6.5-1.7.3v3.3l-1.8 2.8v2.8h1.8l1.8-1.5.2-.5-.5-1v-1.2l1.5-1.6 1.4-.2-1-1.4v-1.6l2-.3zM756 .8l4.4-.8h-4.2zM686.4 269l-.2.7-1 1.4h1l1.8-1 .4-1.8 1.5-2h-1l-1.7.8z" class="country"/>
     <path d="M762.7 1h3.2l3.7 2.4 1.5-.4h1.7l1.4 2.4 2.5.8 4-2 6.2-1.8h3l5-2.4h-34.8zM649.4 229l1-.7 1 1.7 1.8-.2.3-2.6-.7-2-1.7-.4-1.2-.7-2 1.3.2 1.7.8 2zM605 862h1.8l.8-.8-1.2-1.6.2-.6v-1.3l-1.4-2.8-1.8 3-.2 2.3 1.4 1.8zM602.2 862.7l-.7 2.8.8 1.3.4-.6.6-2.2-.6-1.8zM695.4 255.8l-.5-2.2-1.5-.8-.4.8-.5 2.4 1.2 1zM695.3 309.4v-1.2l-2 1.8-.6 2 .8-.3zM680.6 245l.7 1.7 1.6-1 1.2-3v-1.4l-3-1zM782 189l.2-1-2-2.7-2.2 1.3-.4 1.7 1.2 1.4 2 .4zM722.5 154l.5-1.5-.8-.6-1.6.3-.6.8v1l1.4.8zM928.3 21.7l.6 2.2h1l.6-.5 1.2-4-1.5.3-1.5.8zM901 143.5l-1.4.7.5.3h2.5l3.6-2.3 2-4.6-3-.2.3-1.4 1.2-3.7-.2-1.6-1 .6-3.8 3.7-1.3 2.3v2.3h1.7v.7l-1 2zM605.3 224.2l-1.7 1.3 1 .8.6 1.5 1 2h1l.4-.6v-2.6zM31.2 808.2l1.3.5v-.6l-.5-.8-.8-1.2-1.4-1.6-1-.3v1l.6 3.3h1.4zM606 238.2l.7.3 1 1 1.4-.5 2.6-1.5 1-2-.8-1.2-2.4-.5-.5.8-2.6 2.4zM572.2 874.7l-1.4.4-.3 1.3.6 1 2.8 1.2.7-1.4-.4-1-1-1.3zM36 815.3l-.7.6-.3 1.2 1.4 1 .4-2.5zM47.4 825.2l-.2-2.6-.7.2-.3 1v1.3l.4.4h.4zM72.5 848l-.4-1-.8-1h-1l-2 1.4h-1.3l.3.8 2 2.3 1.7 5.2.7-.8-.2-1.3 1-2.8zM51.7 837.4v.6l1.4 2 1-1zM581.8 851l1 .8-.2-1 .2-1 2.6.2.3-1-.2-1-1.5-2.7-.2-3-.6-1.4-1-1.2-1-1-1.2-.7-.5-.7.7-4v-4.5l-.3-1.8-1-1-1.5-3-2.6-.6-2.5 2-2 .2-1.6-.8-.7-1.3-1-.7-1.7-.8-1.5-1.4-1-.5-.6 1.3.6 1.4.8 1.4 1.2 5.5.8 5.5 1.4.4 2.7-1.4h1l2 2 1 2.4.3 1.2v1.2l-1.4 6 1 2.6.2 1.3-.3 2.6.7.8 2.8 1 2.4 1.6-.2-2-.4-2-.5-4.2 1.3 1zM621.7 239.7l-1.3-1.4h-1.2v1.2l1 1.2 2 .3zM613.5 181.2l-.7-2.2-1.6-1.2.4 4 1.6 1zM609 269.8l.3.3 1 .4 1-.5 6.2-.5 3-1 4-1.8 1-1 .5-1.7-.7-2-3.4-1h-1.7l-8.7 2.5-3.3 2.5-1 1.5.5.8z" class="country"/>
