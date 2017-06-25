@@ -602,16 +602,6 @@ var calcLength = function (target) {
 
 $('.draggable').draggabilly();
 
-$('.route path')
-.on('mouseenter', function () {
-  var country = $(this).attr('class').split(' ')[0];
-  $('.route .' + country).css('stroke-width', '13px');
-})
-.on('mouseleave', function () {
-  var country = $(this).attr('class').split(' ')[0];
-  $('.route .' + country).css('stroke-width', '3');
-})
-
 $('.navbar').sticky({
   topSpacing: 0,
   zIndex: 10
