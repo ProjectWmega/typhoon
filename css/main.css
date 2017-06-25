@@ -1,3 +1,6 @@
+hr {
+  margin: 10px 0;
+}
 .navbar-default {
   background-color: rgba(255, 255, 255, .3);
   border-color: transparent;
@@ -62,7 +65,7 @@
 }
 
 .route-selector {
-  padding: 1em;
+  padding: .5em;
   position: fixed;
   top: calc(57px + 1em);
   left: 2%;
@@ -85,12 +88,13 @@
 }
 
 .route-selector .title {
+  margin: 5px 0;
   color: #fff;
 }
 
 .route-selector .route,
 .route-selector .info {
-  margin: 5px 0;
+  margin: 3px 0;
 }
 
 .route-selector .btn-route,
