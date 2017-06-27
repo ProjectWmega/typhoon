@@ -36,10 +36,10 @@
       <span class="setting-label">全不選</span>
     </div>
   </div>
-  <div class="route">
+  <!-- <div class="route">
     <button class="btn-route active" data-route="avg"></button>
     <span class="setting-label">各國平均路徑</span>
-  </div>
+  </div> -->
   <div class="route">
     <button class="btn-route active" data-route="tw"></button>
     <span class="setting-label">中央氣象局 (CWB)</span>
@@ -85,22 +85,40 @@
       <h4>下週二颱風可能襲擾</h4>
     </div>
   </div>
-  <div class="well">
-    <h1>莫蘭蒂</h1>
-  </div>
-  <div class="well">
+  <div class="well alert-status">
     <h2 class="table-cell second-title">颱風警報燈號</h2>
-    <div class="table-cell alert-box">
+    <div class="table-cell alert-box sea">
       <h5 class="title">海上警報</h5>
       <span class="status on">ON</span>
     </div>
-    <div class="table-cell alert-box">
+    <div class="table-cell alert-box land">
       <h5 class="title">陸上警報</h5>
       <span class="status off">OFF</span>
     </div>
   </div>
-  <div class="well">
-    <h2>各地概略影響</h2>
+  <div class="well typhoon-info">
+    <div>
+      <div class="number">12</div>
+      <h1 class="title">莫蘭蒂(Meranti)</h1>
+      <small class="level mid">中度颱風</small>
+    </div>
+    <div class="clearfix"></div>
+    <div class="impact-level high">
+      <div class="title">對台影響程度</div>
+      <div class="level-text">高</div>
+    </div>
+    <div class="detail">
+      <span class="update-time">更新時間：2017.07.15 15:00</span>
+      <div class="data">
+        <div>中心氣壓：<span class="pressure-value">942hPa</span></div>
+        <div>移動速度方向：<span class="wind-direction-value">東北，20km/hr</span></div>
+        <div>最大風速：<span class="max-wind-value">45m/s（13級風）</span></div>
+        <div>最大陣風：<span class="gust-value">65m/s（17級風）</span></div>
+        <div>七級暴風半徑：<span class="level-7-radius-value">180km</span></div>
+        <div>十級暴風半徑：<span class="level-10-radius-value">--km</span></div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
   </div>
 </div>
 <svg viewBox="0 0 1600 900" id="main-svg">

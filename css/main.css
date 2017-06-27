@@ -1,6 +1,11 @@
 hr {
   margin: 10px 0;
 }
+
+.clearfix {
+  clear: both;
+}
+
 .navbar-default {
   background-color: rgba(255, 255, 255, .3);
   border-color: transparent;
@@ -13,7 +18,7 @@ hr {
 }
 
 .navbar .nav li a {
-  color: #000;
+  color: #000000;
   font-size: 18px;
   background-color: initial !important;
 }
@@ -72,7 +77,7 @@ hr {
   z-index: 2;
   font-size: .8em;
   background-color: #6f7070;
-  color: #ccc;
+  color: #cccccc;
   cursor: move;
 }
 
@@ -89,7 +94,7 @@ hr {
 
 .route-selector .title {
   margin: 5px 0;
-  color: #fff;
+  color: #ffffff;
 }
 
 .route-selector .route,
@@ -102,8 +107,8 @@ hr {
   width: 1.5em;
   height: 1.5em;
   padding: 0;
-  border: 2px #eee solid;
-  background-color: #fff;
+  border: 2px #eeeeee solid;
+  background-color: #ffffff;
   outline: none;
 }
 
@@ -136,20 +141,22 @@ hr {
 }
 
 .route-selector .btn-route.active {
-  color: #000;
+  color: #000000;
 }
 
 .info-box {
-  padding: 1em;
+  padding: 2em 1em;
   position: fixed;
   top: calc(57px + 1em);
   right: 2%;
   z-index: 2;
   font-size: .8em;
+  color: #595757;
 }
 
 .info-box .well {
-  background-color: rgba(245, 245, 245, .3);
+  padding: 3px 19px;
+  background-color: rgba(180, 180, 180, .2);
 }
 
 .info-title {
@@ -175,9 +182,9 @@ h1.first-title {
 
 h2.second-title {
   margin: 0;
-  padding: 0;
+  padding: 0 15px 0 5px;
   vertical-align: middle;
-  font-size: 2em;
+  font-size: 2.5em;
 }
 
 .alert-box {
@@ -187,19 +194,105 @@ h2.second-title {
 
 .alert-box .title {
   font-size: 1.3em;
+  margin: 5px;
 }
 
 .alert-box .status {
-  padding: 5px 10px;
+  padding: 3px 13px;
   border-radius: 5px;
-  color: #fff;
+  color: #ffffff;
   font-size: 2em;
 }
 
-.alert-box .status.on {
-  background-color: #b06060;
+.alert-box.sea .status.on {
+  background-color: #5681a2;
+}
+
+.alert-box.land .status.on {
+  background-color: #ab6866;
 }
 
 .alert-box .status.off {
   background-color: #595757;
+}
+
+.typhoon-info .title {
+  margin-bottom: 5px;
+}
+
+.typhoon-info .number {
+  display: inline-block;
+  float: left;
+  border: 1px #bbbbbb solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 4em;
+  line-height: 1;
+}
+
+.typhoon-info .level {
+  padding: 2px 3px;
+  font-style: italic;
+  font-size: 15px;
+}
+
+.typhoon-info .level.high {
+  background-color: #ab6866;
+  color: #ffffff;
+}
+
+.typhoon-info .level.mid {
+  background-color: #cb9672;
+  color: #ffffff;
+}
+
+.typhoon-info .level.low {
+  background-color: #7bb6d3;
+  color: #ffffff;
+}
+
+.typhoon-info .impact-level {
+  display: inline-block;
+  float: right;
+  padding: 5px;
+  margin: 1.5em 0;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #888888;
+  text-align: center;
+}
+
+.typhoon-info .impact-level.high {
+  background-color: #ab6866;
+}
+
+.typhoon-info .impact-level.mid {
+  background-color: #cb9672;
+}
+
+.typhoon-info .impact-level.low {
+  background-color: #7bb6d3;
+}
+
+.impact-level .title {
+  font-size: 1.5em;
+}
+
+.impact-level .level-text {
+  font-size: 7em;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.typhoon-info .detail {
+  display: inline-block;
+  margin-top: 1em;
+  font-size: 1.1em;
+}
+
+.typhoon-info .detail .data {
+  margin-top: 5px;
+  border-left: 1px #cccccc solid;
+  padding-left: 1em;
 }
