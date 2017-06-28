@@ -163,28 +163,31 @@ hr {
   display: table;
 }
 
-.info-title .fa-exclamation-triangle {
-  font-size: 50px;
-  vertical-align: middle;
-  color: red;
-  padding: 0 10px;
+.info-title .exclamation-triangle {
+  padding-top: 10px;
+  width: 90%;
 }
 
 .table-cell {
   display: table-cell;
 }
 
-h1.first-title {
+.headline .first-title {
   margin-top: 0;
   vertical-align: middle;
   font-size: 3em;
+  font-weight: bold;
+}
+
+.headline .second-title {
+  font-weight: bold;
 }
 
 h2.second-title {
   margin: 0;
-  padding: 0 15px 0 5px;
+  padding: 0 10px 0 5px;
   vertical-align: middle;
-  font-size: 2.5em;
+  font-size: 2em;
 }
 
 .alert-box {
@@ -198,8 +201,9 @@ h2.second-title {
 }
 
 .alert-box .status {
-  padding: 3px 13px;
+  display: inline-block;
   border-radius: 5px;
+  width: 2.4em;
   color: #ffffff;
   font-size: 2em;
 }
@@ -217,15 +221,17 @@ h2.second-title {
 }
 
 .typhoon-info .title {
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  font-size: 2.5em;
+  font-weight: bold;
 }
 
 .typhoon-info .number {
   display: inline-block;
   float: left;
-  border: 1px #bbbbbb solid;
+  border: 1px #aaaaaa solid;
   border-radius: 5px;
-  padding: 10px;
+  padding: 5px;
   margin-right: 10px;
   font-size: 4em;
   line-height: 1;
@@ -233,8 +239,12 @@ h2.second-title {
 
 .typhoon-info .level {
   padding: 2px 3px;
-  font-style: italic;
   font-size: 15px;
+}
+
+.typhoon-info .level .level-text {
+  display: inline-block;
+  transform: skew(-6deg);
 }
 
 .typhoon-info .level.high {
@@ -256,7 +266,7 @@ h2.second-title {
   display: inline-block;
   float: right;
   padding: 5px;
-  margin: 1.5em 0;
+  margin-top: 2.3em;
   border-radius: 3px;
   color: #ffffff;
   background-color: #888888;
@@ -276,11 +286,11 @@ h2.second-title {
 }
 
 .impact-level .title {
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .impact-level .level-text {
-  font-size: 7em;
+  font-size: 6em;
   font-weight: bold;
   line-height: 1;
 }
