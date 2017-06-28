@@ -149,7 +149,7 @@ hr {
   position: fixed;
   top: calc(57px + 1em);
   right: 2%;
-  z-index: 2;
+  z-index: 1;
   font-size: .8em;
   color: #595757;
 }
