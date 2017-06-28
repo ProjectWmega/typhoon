@@ -70,6 +70,7 @@ hr {
 }
 
 .route-selector {
+  display: none;
   padding: .5em;
   position: fixed;
   top: calc(57px + 1em);
@@ -145,6 +146,7 @@ hr {
 }
 
 .info-box {
+  display: none;
   padding: 2em 1em;
   position: fixed;
   top: calc(57px + 1em);

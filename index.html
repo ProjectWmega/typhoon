@@ -652,33 +652,32 @@ $('.day').each(function () {
   var $day = $(this);
   var $path = $day.find('.route path');
   var $info = $day.find('.info, .point');
-  var pathAnimation = {};
-  var infoAnimation = {};
 
   $path.each(function () {
-    var $route = $(this)
+    var $route = $(this);
     var route = $route[0];
 
     $.Velocity(route, {
       'stroke-dasharray': calcLength(route),
       'stroke-dashoffset': calcLength(route)
     }, 0);
-
   });
-  pathAnimation = {
+
+  animationSequence.push({
     e: $path,
     p: {'stroke-dashoffset': 0},
     o: {duration: 800, easing: 'easeOutCubic'}
-  };
-
-  infoAnimation = {
+  });
+  animationSequence.push({
     e: $info,
     p: 'fadeIn',
     o: {duration: 300}
-  }
-
-  animationSequence.push(pathAnimation);
-  animationSequence.push(infoAnimation);
+  });
+});
+animationSequence.push({
+  e: $('.info-box, .route-selector'),
+  p: 'fadeIn',
+  o: {duration: 300}
 });
 
 $.Velocity.RunSequence(animationSequence);
