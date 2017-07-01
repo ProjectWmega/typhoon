@@ -626,16 +626,14 @@ $('.navbar').sticky({
   topSpacing: 0,
   zIndex: 10
 });
-$('.info, .point').hide();
-$('.city g').hide();
 
 var animationSequence = [];
 
 animationSequence.push({
-    e: $('.city g'),
-    p: 'fadeIn',
-    o: {duration: 800}
-  });
+  e: $('.city g, .grid-line'),
+  p: 'fadeIn',
+  o: {duration: 800}
+});
 
 $('.eye circle').each(function () {
   var $this = $(this);
@@ -665,6 +663,11 @@ $('.day').each(function () {
 
   animationSequence.push({
     e: $path,
+    p: 'fadeIn',
+    o: {duration: 0}
+  });
+  animationSequence.push({
+    e: $path,
     p: {'stroke-dashoffset': 0},
     o: {duration: 800, easing: 'easeOutCubic'}
   });
@@ -680,7 +683,9 @@ animationSequence.push({
   o: {duration: 300}
 });
 
-$.Velocity.RunSequence(animationSequence);
+setTimeout(function () {
+  $.Velocity.RunSequence(animationSequence);
+}, 500);
 
 $('.btn-route').on('click', function () {
   var $this = $(this);

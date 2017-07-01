@@ -3,7 +3,11 @@ svg {
   top: -50px;
   height: calc(100% + 50px);
 }
-.city g {
+.city g,
+.route path,
+.eye circle,
+.info,
+.point {
   display: none;
 }
 
@@ -38,6 +42,9 @@ svg {
 
 /* Grid line */
 
+.grid-line {
+  display: none;
+}
 .latitude-line {
   fill: none;
   stroke: #717071;
