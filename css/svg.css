@@ -5,7 +5,6 @@ svg {
 }
 .city g,
 .route path,
-.eye circle,
 .info,
 .point {
   display: none;
