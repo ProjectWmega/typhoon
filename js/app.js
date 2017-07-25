@@ -80,12 +80,12 @@ const app = new Vue({
       updateTime: '2017-07-15 15:00'
     },
     routes: {
-      'cwb': '中央氣象局',
-      'cma': '中國氣象局',
-      'hk': '香港天文台',
-      'jma': '日本氣象廳',
-      'jtwc': '美軍聯合颱風警報中心',
-      'kma': '大韓民國氣象廳'
+      cwb: '中央氣象局',
+      cma: '中國氣象局',
+      hk: '香港天文台',
+      jma: '日本氣象廳',
+      jtwc: '美軍聯合颱風警報中心',
+      kma: '大韓民國氣象廳'
     },
     routeSelector: {
       all: false,
