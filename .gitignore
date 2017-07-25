@@ -1,7 +1,5 @@
 node_modules/
 bower_components/
-package.json
-bower.json
 *.log
 npm-debug.log*
 .DS_Store

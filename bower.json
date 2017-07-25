@@ -1,0 +1,30 @@
+{
+  "name": "typhoon",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "osk2"
+  ],
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/ProjectWmega/typhoon",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "axios": "^0.16.2",
+    "components-font-awesome": "^4.7.0",
+    "draggabilly": "^2.1.1",
+    "bootstrap": "^3.3.7",
+    "jquery-sticky": "sticky#^1.0.4",
+    "hover": "Hover#^2.1.1",
+    "lodash": "^4.17.4",
+    "jquery": "2",
+    "svg.js": "^2.6.3",
+    "velocity": "^1.5.0",
+    "vue": "^2.4.2"
+  }
+}
