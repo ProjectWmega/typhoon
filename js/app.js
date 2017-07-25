@@ -144,7 +144,22 @@ const app = new Vue({
     clickRoute: function (route) {
       this.routeSelector[route] = !this.routeSelector[route];
     },
-    fillTimeText: time => (String(time).length === 1 ? `0${time}` : String(time))
+    fillTimeText: time => (String(time).length === 1 ? `0${time}` : String(time)),
+    uiFadeIn() {
+      this.animationSequence.push({
+        e: $('.city g, .grid-line'),
+        p: 'fadeIn',
+        o: {duration: 800}
+      })
+      this.animationSequence.push({
+        e: $('.info-box, .route-selector'),
+        p: 'fadeIn',
+        o: {duration: 300}
+      })
+      setTimeout(() => {
+        $.Velocity.RunSequence(this.animationSequence)
+      }, 500)
+    }
   },
   created() {
     const vm = this;
@@ -153,6 +168,7 @@ const app = new Vue({
         _.map(vm.typhoonInfo, (_, key) => {
           vm.typhoonInfo[key] = typhoonJson.data.typhs[0][key];
         });
+        this.uiFadeIn();
       })
       .catch((error) => {
         console.log(error);
@@ -171,92 +187,92 @@ $('.navbar').sticky({
   zIndex: 10
 });
 
-const animationSequence = [];
+// const animationSequence = [];
 
-animationSequence.push({
-  e: $('.city g, .grid-line'),
-  p: 'fadeIn',
-  o: {duration: 800}
-});
+// animationSequence.push({
+//   e: $('.city g, .grid-line'),
+//   p: 'fadeIn',
+//   o: {duration: 800}
+// });
 
-$('.eye circle').each(() => {
-  const $this = $(this);
+// $('.eye circle').each(() => {
+//   const $this = $(this);
 
-  $this.data('original-r', $this.attr('r')).attr('r', 0);
-  animationSequence.push({
-    e: $this,
-    p: {'r': $this.data('original-r')},
-    o: {duration: 300, easing: 'easeOutCubic'}
-  });
-});
+//   $this.data('original-r', $this.attr('r')).attr('r', 0);
+//   animationSequence.push({
+//     e: $this,
+//     p: {'r': $this.data('original-r')},
+//     o: {duration: 300, easing: 'easeOutCubic'}
+//   });
+// });
 
-$('.day').each(() => {
-  const $day = $(this);
-  const $path = $day.find('.route path');
-  const $info = $day.find('.info, .point');
+// $('.day').each(() => {
+//   const $day = $(this);
+//   const $path = $day.find('.route path');
+//   const $info = $day.find('.info, .point');
 
-  $path.each(() => {
-    const $route = $(this);
-    const route = $route[0];
+//   $path.each(() => {
+//     const $route = $(this);
+//     const route = $route[0];
 
-    $.Velocity(route, {
-      'stroke-dasharray': calcLength(route),
-      'stroke-dashoffset': calcLength(route)
-    }, 0);
-  });
+//     $.Velocity(route, {
+//       'stroke-dasharray': calcLength(route),
+//       'stroke-dashoffset': calcLength(route)
+//     }, 0);
+//   });
 
-  animationSequence.push({
-    e: $path,
-    p: 'fadeIn',
-    o: {duration: 0}
-  });
-  animationSequence.push({
-    e: $path,
-    p: {'stroke-dashoffset': 0},
-    o: {duration: 800, easing: 'easeOutCubic'}
-  });
-  animationSequence.push({
-    e: $info,
-    p: 'fadeIn',
-    o: {duration: 300}
-  });
-});
-animationSequence.push({
-  e: $('.info-box, .route-selector'),
-  p: 'fadeIn',
-  o: {duration: 300}
-});
+//   animationSequence.push({
+//     e: $path,
+//     p: 'fadeIn',
+//     o: {duration: 0}
+//   });
+//   animationSequence.push({
+//     e: $path,
+//     p: {'stroke-dashoffset': 0},
+//     o: {duration: 800, easing: 'easeOutCubic'}
+//   });
+//   animationSequence.push({
+//     e: $info,
+//     p: 'fadeIn',
+//     o: {duration: 300}
+//   });
+// });
+// animationSequence.push({
+//   e: $('.info-box, .route-selector'),
+//   p: 'fadeIn',
+//   o: {duration: 300}
+// });
 
-setTimeout(() => {
-  $.Velocity.RunSequence(animationSequence);
-}, 500);
+// setTimeout(() => {
+//   $.Velocity.RunSequence(animationSequence);
+// }, 500);
 
-$('.btn-route').on('click', () => {
-  const $this = $(this);
-  const routes = [];
+// $('.btn-route').on('click', () => {
+//   const $this = $(this);
+//   const routes = [];
 
-  if (['all', 'none'].indexOf($this.data('route')) > -1) {
-    if ($this.data('route') === 'all') {
-      $('.btn-route').addClass('active');
-      $('.tw, .cn, .hk, .jp, .kr, .usa').show();
-    }
-    if ($this.data('route') === 'none') {
-      $('.btn-route').removeClass('active');
-      $('.tw, .cn, .hk, .jp, .kr, .usa').hide();
-    }
-    return;
-  }
+//   if (['all', 'none'].indexOf($this.data('route')) > -1) {
+//     if ($this.data('route') === 'all') {
+//       $('.btn-route').addClass('active');
+//       $('.tw, .cn, .hk, .jp, .kr, .usa').show();
+//     }
+//     if ($this.data('route') === 'none') {
+//       $('.btn-route').removeClass('active');
+//       $('.tw, .cn, .hk, .jp, .kr, .usa').hide();
+//     }
+//     return;
+//   }
 
-  $this.toggleClass('active');
-  $('.btn-route.active').each(() => {
-    routes.push('.' + $(this).data('route'));
-  });
-  $('.tw, .cn, .hk, .jp, .kr, .usa, .avg').hide();
-  $(routes.join(',')).show();
-});
+//   $this.toggleClass('active');
+//   $('.btn-route.active').each(() => {
+//     routes.push('.' + $(this).data('route'));
+//   });
+//   $('.tw, .cn, .hk, .jp, .kr, .usa, .avg').hide();
+//   $(routes.join(',')).show();
+// });
 
-$('.btn-toggle').on('click', () => {
-  const info = '.' + $(this).data('toggle');
+// $('.btn-toggle').on('click', () => {
+//   const info = '.' + $(this).data('toggle');
 
-  $(info).toggle();
-});
+//   $(info).toggle();
+// });
