@@ -1,13 +1,17 @@
-axios.get('../data/route.json').then(data => {
-  const topLeft = data.coordinate.topLeft;
-  const downLeft = data.coordinate.downLeft;
-  const downRight = data.coordinate.downRight;
-  const topRight = data.coordinate.topRight;
-  const xRatio = (topRight[0] - topLeft[0]) / 1600;
-  const yRatio = (topLeft[1] - downLeft[1]) / 900;
-  const draw = SVG('main-svg');
-  // const polyline = draw.circle(20).fill('#000').move((data.points[0][0] - topLeft[0]) / xRatio, 900 - (data.points[0][1] - downLeft[1]) / yRatio);
-});
+// axios.get('../data/route.json').then(data => {
+//   const topLeft = data.coordinate.topLeft;
+//   const downLeft = data.coordinate.downLeft;
+//   const downRight = data.coordinate.downRight;
+//   const topRight = data.coordinate.topRight;
+//   const xRatio = (topRight[0] - topLeft[0]) / 1600;
+//   const yRatio = (topLeft[1] - downLeft[1]) / 900;
+//   const draw = SVG('main-svg');
+//   // const polyline = draw.circle(20).fill('#000').move((data.points[0][0] - topLeft[0]) / xRatio, 900 - (data.points[0][1] - downLeft[1]) / yRatio);
+// });
+
+Vue.prototype.$http = axios;
+
+const TYPHOON_INFO_API = 'http://140.134.26.64:1234/wmega/webapi/typh/getTyphoonInfo';
 
 const calcLength = target => {
   let totalLength = 0;
@@ -97,6 +101,21 @@ const app = new Vue({
       jma: true,
       jtwc: true,
       kma: true
+    },
+    animationSequence: []
+  },
+  computed: {
+    updateTimeText() {
+      const releaseDate = new Date(this.typhoonInfo.updateTime);
+
+      const formatedYear = this.fillTimeText(releaseDate.getFullYear());
+      const formatedMonth = this.fillTimeText(releaseDate.getMonth());
+      const formatedDay = this.fillTimeText(releaseDate.getDay());
+      const formatedHour = this.fillTimeText(releaseDate.getHours());
+      const formatMinuts = this.fillTimeText(releaseDate.getMinutes());
+
+      return `${formatedYear}.${formatedMonth}.${formatedDay}
+        ${formatedHour}:${formatMinuts}`;
     }
   },
   methods: {
@@ -124,7 +143,20 @@ const app = new Vue({
     },
     clickRoute: function (route) {
       this.routeSelector[route] = !this.routeSelector[route];
-    }
+    },
+    fillTimeText: time => (String(time).length === 1 ? `0${time}` : String(time))
+  },
+  created() {
+    const vm = this;
+    this.$http.get(TYPHOON_INFO_API)
+      .then((typhoonJson) => {
+        _.map(vm.typhoonInfo, (_, key) => {
+          vm.typhoonInfo[key] = typhoonJson.data.typhs[0][key];
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   mounted () {
     // initialize
