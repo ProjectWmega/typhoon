@@ -109,8 +109,8 @@ const app = new Vue({
       const releaseDate = new Date(this.typhoonInfo.updateTime);
 
       const formatedYear = this.fillTimeText(releaseDate.getFullYear());
-      const formatedMonth = this.fillTimeText(releaseDate.getMonth());
-      const formatedDay = this.fillTimeText(releaseDate.getDay());
+      const formatedMonth = this.fillTimeText(releaseDate.getMonth() + 1);
+      const formatedDay = this.fillTimeText(releaseDate.getDate());
       const formatedHour = this.fillTimeText(releaseDate.getHours());
       const formatMinuts = this.fillTimeText(releaseDate.getMinutes());
 
