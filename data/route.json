@@ -1,0 +1,8 @@
+{
+  "coordinateMapping": {
+    "topLeft": [101.074, 43.97638],
+    "downLeft": [101.074, 8.5433],
+    "downRight": [167.1901, 8.5433],
+    "topRight": [167.1901, 43.97638]
+  }
+}

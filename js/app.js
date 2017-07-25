@@ -1,13 +1,13 @@
-// $.getJSON('data/route.json', data => {
-//   const topLeft = data.coordinate.topLeft;
-//   const downLeft = data.coordinate.downLeft;
-//   const downRight = data.coordinate.downRight;
-//   const topRight = data.coordinate.topRight;
-//   const xRatio = (topRight[0] - topLeft[0]) / 1600;
-//   const yRatio = (topLeft[1] - downLeft[1]) / 900;
-//   const draw = SVG('main');
-//   const polyline = draw.circle(20).fill('#000').move((data.points[0][0] - topLeft[0]) / xRatio, 900 - (data.points[0][1] - downLeft[1]) / yRatio);
-// });
+axios.get('../data/route.json').then(data => {
+  const topLeft = data.coordinate.topLeft;
+  const downLeft = data.coordinate.downLeft;
+  const downRight = data.coordinate.downRight;
+  const topRight = data.coordinate.topRight;
+  const xRatio = (topRight[0] - topLeft[0]) / 1600;
+  const yRatio = (topLeft[1] - downLeft[1]) / 900;
+  const draw = SVG('main-svg');
+  // const polyline = draw.circle(20).fill('#000').move((data.points[0][0] - topLeft[0]) / xRatio, 900 - (data.points[0][1] - downLeft[1]) / yRatio);
+});
 
 const calcLength = target => {
   let totalLength = 0;
