@@ -78,6 +78,25 @@ const app = new Vue({
       number: 13,
       pressure: '942hPa',
       updateTime: '2017-07-15 15:00'
+    },
+    routes: {
+      'cwb': '中央氣象局',
+      'cma': '中國氣象局',
+      'hk': '香港天文台',
+      'jma': '日本氣象廳',
+      'jtwc': '美軍聯合颱風警報中心',
+      'kma': '大韓民國氣象廳'
+    },
+    routeSelector: {
+      all: false,
+      disableAll: false,
+      avg: true,
+      cwb: true,
+      cma: true,
+      hk: true,
+      jma: true,
+      jtwc: true,
+      kma: true
     }
   },
   methods: {
@@ -92,11 +111,28 @@ const app = new Vue({
     },
     impactLevelClass: level => {
       return impactLevel[level].class;
+    },
+    selectAllRoute: function () {
+      for (let key in this.routeSelector) {
+        this.routeSelector[key] = true;
+      }
+    },
+    disableAllRoute: function () {
+      for (let key in this.routeSelector) {
+        this.routeSelector[key] = false;
+      }
+    },
+    clickRoute: function (route) {
+      this.routeSelector[route] = !this.routeSelector[route];
     }
+  },
+  mounted () {
+    // initialize
+    $('.draggable').draggabilly();
   }
 })
 
-$('.draggable').draggabilly();
+// $('.draggable').draggabilly();
 
 $('.navbar').sticky({
   topSpacing: 0,

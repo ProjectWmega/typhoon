@@ -30,41 +30,21 @@
       <h4 class="title">各國颱風預測路徑選擇</h4>
       <div class="multi-select">
         <div class="route">
-          <button class="btn-route" data-route="all"></button>
+          <button class="btn-route" :class="{ active: routeSelector.all }" @click="selectAllRoute" data-route="all"></button>
           <span class="setting-label">全選</span>
         </div>
         <div class="route">
-          <button class="btn-route" data-route="none"></button>
+          <button class="btn-route" :class="{ active: routeSelector.disableAll }" @click="disableAllRoute"  data-route="none"></button>
           <span class="setting-label">全不選</span>
         </div>
       </div>
       <div class="route">
-        <button class="btn-route active" data-route="avg"></button>
+        <button class="btn-route" :class="{ active: routeSelector.avg }" @click="clickRoute('avg')" data-route="avg"></button>
         <span class="setting-label">各國平均路徑</span>
       </div>
-      <div class="route">
-        <button class="btn-route active" data-route="tw"></button>
-        <span class="setting-label">中央氣象局 (CWB)</span>
-      </div>
-      <div class="route">
-        <button class="btn-route active" data-route="cn"></button>
-        <span class="setting-label">中國氣象局 (CMA)</span>
-      </div>
-      <div class="route">
-        <button class="btn-route active" data-route="hk"></button>
-        <span class="setting-label">香港天文台 (HK)</span>
-      </div>
-      <div class="route">
-        <button class="btn-route active" data-route="jp"></button>
-        <span class="setting-label">日本氣象廳 (JMA)</span>
-      </div>
-      <div class="route">
-        <button class="btn-route active" data-route="usa"></button>
-        <span class="setting-label">美軍聯合颱風警報中心 (JTWC)</span>
-      </div>
-      <div class="route">
-        <button class="btn-route active" data-route="kr"></button>
-        <span class="setting-label">大韓民國氣象廳 (KMA)</span>
+      <div class="route" v-for="(text, id) in routes">
+        <button class="btn-route" :class="{ active: routeSelector[id] }" @click="clickRoute(id)" :data-route="id"></button>
+        <span class="setting-label">{{text}} ({{id.toUpperCase()}})</span>
       </div>
       <hr>
       <h4 class="title">地圖資訊選擇</h4>
