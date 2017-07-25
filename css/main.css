@@ -121,23 +121,23 @@ hr {
   background-color: #d192a0;
 }
 
-.route-selector .btn-route.active[data-route=kr] {
+.route-selector .btn-route.active[data-route=kma] {
   background-color: #b16262;
 }
 
-.route-selector .btn-route.active[data-route=jp] {
+.route-selector .btn-route.active[data-route=jma] {
   background-color: #cf916c;
 }
 
-.route-selector .btn-route.active[data-route=cn] {
+.route-selector .btn-route.active[data-route=cma] {
   background-color: #d4b868;
 }
 
-.route-selector .btn-route.active[data-route=tw] {
+.route-selector .btn-route.active[data-route=cwb] {
   background-color: #579c90;
 }
 
-.route-selector .btn-route.active[data-route=usa] {
+.route-selector .btn-route.active[data-route=jtwc] {
   background-color: #6cafcd;
 }
 
