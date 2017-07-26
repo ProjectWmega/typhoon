@@ -12,6 +12,15 @@
 Vue.prototype.$http = axios;
 
 const TYPHOON_INFO_API = 'http://140.134.26.64:1234/wmega/webapi/typh/getTyphoonInfo';
+const CORNER_COORDS = {
+  topLeft: [101.074, 43.97638],
+  downLeft: [101.074, 8.5433],
+  downRight: [167.1901, 8.5433],
+  topRight: [167.1901, 43.97638]
+};
+
+const X_RATIO = (CORNER_COORDS.topRight[0] - CORNER_COORDS.topLeft[0]) / 1600;
+const Y_RATIO = (CORNER_COORDS.topLeft[1] - CORNER_COORDS.downLeft[1]) / 900;
 
 const calcLength = target => {
   let totalLength = 0;
@@ -102,7 +111,8 @@ const app = new Vue({
       jtwc: true,
       kma: true
     },
-    animationSequence: []
+    animationSequence: [],
+    typhoonEye: { x: 0, y: 0 },
   },
   computed: {
     updateTimeText() {
@@ -159,7 +169,11 @@ const app = new Vue({
       setTimeout(() => {
         $.Velocity.RunSequence(this.animationSequence)
       }, 500)
-    }
+    },
+    coords2SvgPosition: coords => {
+      return [(coords[0] - CORNER_COORDS.topLeft[0]) / X_RATIO,
+        900 - ((coords[1] - CORNER_COORDS.downLeft[1]) / Y_RATIO)];
+    },
   },
   created() {
     const vm = this;
@@ -168,6 +182,16 @@ const app = new Vue({
         _.map(vm.typhoonInfo, (_, key) => {
           vm.typhoonInfo[key] = typhoonJson.data.typhs[0][key];
         });
+
+        // setting typhoon eye
+        // TODO: multiple typhoons' eye
+        const standardPosition = this.coords2SvgPosition([
+          typhoonJson.data.typhs[0].fcstRoutes[2].points[0].lng,
+          typhoonJson.data.typhs[0].fcstRoutes[2].points[0].lat
+        ]);
+        vm.typhoonEye.x = standardPosition[0];
+        vm.typhoonEye.y = standardPosition[1];
+
         this.uiFadeIn();
       })
       .catch((error) => {
@@ -186,14 +210,6 @@ $('.navbar').sticky({
   topSpacing: 0,
   zIndex: 10
 });
-
-// const animationSequence = [];
-
-// animationSequence.push({
-//   e: $('.city g, .grid-line'),
-//   p: 'fadeIn',
-//   o: {duration: 800}
-// });
 
 // $('.eye circle').each(() => {
 //   const $this = $(this);
@@ -237,42 +253,4 @@ $('.navbar').sticky({
 //     o: {duration: 300}
 //   });
 // });
-// animationSequence.push({
-//   e: $('.info-box, .route-selector'),
-//   p: 'fadeIn',
-//   o: {duration: 300}
-// });
 
-// setTimeout(() => {
-//   $.Velocity.RunSequence(animationSequence);
-// }, 500);
-
-// $('.btn-route').on('click', () => {
-//   const $this = $(this);
-//   const routes = [];
-
-//   if (['all', 'none'].indexOf($this.data('route')) > -1) {
-//     if ($this.data('route') === 'all') {
-//       $('.btn-route').addClass('active');
-//       $('.tw, .cn, .hk, .jp, .kr, .usa').show();
-//     }
-//     if ($this.data('route') === 'none') {
-//       $('.btn-route').removeClass('active');
-//       $('.tw, .cn, .hk, .jp, .kr, .usa').hide();
-//     }
-//     return;
-//   }
-
-//   $this.toggleClass('active');
-//   $('.btn-route.active').each(() => {
-//     routes.push('.' + $(this).data('route'));
-//   });
-//   $('.tw, .cn, .hk, .jp, .kr, .usa, .avg').hide();
-//   $(routes.join(',')).show();
-// });
-
-// $('.btn-toggle').on('click', () => {
-//   const info = '.' + $(this).data('toggle');
-
-//   $(info).toggle();
-// });
