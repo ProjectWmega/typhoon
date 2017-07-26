@@ -152,20 +152,59 @@ const app = new Vue({
       }
     },
     fillTimeText: time => (String(time).length === 1 ? `0${time}` : String(time)),
-    uiFadeIn() {
+    addTyphoonAnimation() {
+      $('.eye circle').each((_, eye) => {
+        const $this = $(eye);
+
+        $this.data('original-r', $this.attr('r')).attr('r', 0);
+        this.animationSequence.push({
+          e: $this,
+          p: {'r': $this.data('original-r')},
+          o: {duration: 300, easing: 'easeOutCubic'}
+        });
+      });
+
+      $('.day').each((_, day) => {
+        const $path = $(day).find('.route path');
+        const $info = $(day).find('.info, .point');
+
+        $path.each((_, route) => {
+          const $route = $(route)[0];
+
+          $.Velocity($route, {
+            'stroke-dasharray': calcLength(route),
+            'stroke-dashoffset': calcLength(route)
+          }, 0);
+        });
+
+        this.animationSequence.push({
+          e: $path,
+          p: 'fadeIn',
+          o: {duration: 100}
+        });
+        this.animationSequence.push({
+          e: $path,
+          p: {'stroke-dashoffset': 0},
+          o: {duration: 800, easing: 'easeOutCubic'}
+        });
+        this.animationSequence.push({
+          e: $info,
+          p: 'fadeIn',
+          o: {duration: 300}
+        });
+      });
+    },
+    addUiAnimation() {
       this.animationSequence.push({
         e: $('.city g, .grid-line'),
         p: 'fadeIn',
         o: {duration: 800}
-      })
+      });
       this.animationSequence.push({
         e: $('.info-box, .route-selector'),
         p: 'fadeIn',
         o: {duration: 300}
-      })
-      setTimeout(() => {
-        $.Velocity.RunSequence(this.animationSequence)
-      }, 500)
+      });
     },
     coords2SvgPosition: coords => {
       return [(coords[0] - CORNER_COORDS.topLeft[0]) / X_RATIO,
@@ -189,7 +228,11 @@ const app = new Vue({
         vm.typhoonEye.x = standardPosition[0];
         vm.typhoonEye.y = standardPosition[1];
 
-        this.uiFadeIn();
+        this.addTyphoonAnimation();
+        this.addUiAnimation();
+        setTimeout(() => {
+          $.Velocity.RunSequence(this.animationSequence)
+        }, 500);
       })
       .catch((error) => {
         console.log(error);
@@ -200,54 +243,3 @@ const app = new Vue({
     $('.draggable').draggabilly();
   }
 })
-
-// $('.draggable').draggabilly();
-
-$('.navbar').sticky({
-  topSpacing: 0,
-  zIndex: 10
-});
-
-// $('.eye circle').each(() => {
-//   const $this = $(this);
-
-//   $this.data('original-r', $this.attr('r')).attr('r', 0);
-//   animationSequence.push({
-//     e: $this,
-//     p: {'r': $this.data('original-r')},
-//     o: {duration: 300, easing: 'easeOutCubic'}
-//   });
-// });
-
-// $('.day').each(() => {
-//   const $day = $(this);
-//   const $path = $day.find('.route path');
-//   const $info = $day.find('.info, .point');
-
-//   $path.each(() => {
-//     const $route = $(this);
-//     const route = $route[0];
-
-//     $.Velocity(route, {
-//       'stroke-dasharray': calcLength(route),
-//       'stroke-dashoffset': calcLength(route)
-//     }, 0);
-//   });
-
-//   animationSequence.push({
-//     e: $path,
-//     p: 'fadeIn',
-//     o: {duration: 0}
-//   });
-//   animationSequence.push({
-//     e: $path,
-//     p: {'stroke-dashoffset': 0},
-//     o: {duration: 800, easing: 'easeOutCubic'}
-//   });
-//   animationSequence.push({
-//     e: $info,
-//     p: 'fadeIn',
-//     o: {duration: 300}
-//   });
-// });
-
