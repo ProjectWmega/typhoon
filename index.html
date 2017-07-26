@@ -39,11 +39,11 @@
         </div>
       </div>
       <div class="route">
-        <button class="btn-route" :class="{ active: routeSelector.avg }" @click="clickRoute('avg')" data-route="avg"></button>
+        <button class="btn-route" :class="{ active: routeSelector.avg }" @click="routeSelector.avg = !routeSelector.avg" data-route="avg"></button>
         <span class="setting-label">各國平均路徑</span>
       </div>
       <div class="route" v-for="(text, id) in routes">
-        <button class="btn-route" :class="{ active: routeSelector[id] }" @click="clickRoute(id)" :data-route="id"></button>
+        <button class="btn-route" :class="{ active: routeSelector[id] }" @click="routeSelector[id] = !routeSelector[id]" :data-route="id"></button>
         <span class="setting-label">{{text}} ({{id.toUpperCase()}})</span>
       </div>
       <hr>

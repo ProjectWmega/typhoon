@@ -151,9 +151,6 @@ const app = new Vue({
         this.routeSelector[key] = false;
       }
     },
-    clickRoute: function (route) {
-      this.routeSelector[route] = !this.routeSelector[route];
-    },
     fillTimeText: time => (String(time).length === 1 ? `0${time}` : String(time)),
     uiFadeIn() {
       this.animationSequence.push({
