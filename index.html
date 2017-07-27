@@ -389,7 +389,21 @@
           <text transform="matrix(1 0 0 1 151.6055 832.3945)" class="font small city-name">胡志明市</text>
         </g>
       </g>
-      <g class="day">
+      <g class="day" v-for="routesOfDate in fcstRoutesDays">
+        <g class="route">
+          <path v-for="route in routesOfDate.routes" :class="route.org" :d="route.d" v-show="routeSelector[route.org]"></path>
+        </g>
+        <g class="point">
+          <circle v-for="route in routesOfDate.routes"
+                  :class="route.org"
+                  :cx="route.cx"
+                  :cy="route.cy"
+                  r="6.3"
+                  v-show="routeSelector[route.org]">
+          </circle>
+        </g>
+      </g>
+      <!-- <g class="day">
         <g class="route">
           <path class="cn" D="M1026.8 777L899 730.4" />
           <path class="tw" D="M1027.3 777L894 732.8" />
@@ -568,7 +582,7 @@
             中度
           </text>
         </g>
-      </g>
+      </g> -->
       <g class="eye">
         <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="10" class="grey-white"></circle>
         <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="28" class="red transparent"></circle>
