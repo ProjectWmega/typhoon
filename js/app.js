@@ -167,7 +167,7 @@ const app = new Vue({
 
       $('.day').each((_, day) => {
         const $path = $(day).find('.route path');
-        const $info = $(day).find('.info, .point');
+        const $points = $(day).find('.point');
 
         $path.each((_, route) => {
           const $route = $(route)[0];
@@ -189,7 +189,7 @@ const app = new Vue({
           o: {duration: 800, easing: 'easeOutCubic'}
         });
         this.animationSequence.push({
-          e: $info,
+          e: $points,
           p: 'fadeIn',
           o: {duration: 300}
         });
@@ -220,7 +220,7 @@ const app = new Vue({
 
         // Setting main typhoon temporarily
         const targetTyphoon = _.filter(typhoonJson.data.typhs, typh =>
-          typh.chineseName === '諾盧')[0];
+          typh.chineseName === '尼莎')[0];
 
         _.map(vm.typhoonInfo, (_, key) => {
           vm.typhoonInfo[key] = targetTyphoon[key];
@@ -280,12 +280,6 @@ const app = new Vue({
           });
         });
 
-        // setting animations
-        this.addTyphoonAnimation();
-        this.addUiAnimation();
-        setTimeout(() => {
-          $.Velocity.RunSequence(this.animationSequence)
-        }, 500);
       })
       .catch((error) => {
         console.log(error);
@@ -294,5 +288,13 @@ const app = new Vue({
   mounted () {
     // initialize
     $('.draggable').draggabilly();
+  },
+  updated() {
+    // setting animations
+    this.addTyphoonAnimation();
+    this.addUiAnimation();
+    setTimeout(() => {
+      $.Velocity.RunSequence(this.animationSequence);
+    }, 500);
   }
 })
