@@ -11,21 +11,6 @@
 
 Vue.prototype.$http = axios;
 
-const DAY_OF_MONTH = {
-  1: 31,
-  2: 28,
-  3: 31,
-  4: 30,
-  5: 31,
-  6: 30,
-  7: 31,
-  8: 31,
-  9: 30,
-  10: 31,
-  11: 30,
-  12: 31
-};
-
 const TYPHOON_INFO_API = 'http://140.134.26.64:1234/wmega/webapi/typh/getTyphoonInfo';
 const CORNER_COORDS = {
   topLeft: [101.074, 43.97638],
@@ -109,7 +94,7 @@ const app = new Vue({
     },
     routes: {
       cwb: '中央氣象局',
-      cma: '中國氣象局',
+      nmc: '中國氣象局',
       hko: '香港天文台',
       jma: '日本氣象廳',
       jtwc: '美軍聯合颱風警報中心',
@@ -120,7 +105,7 @@ const app = new Vue({
       disableAll: false,
       avg: true,
       cwb: true,
-      cma: true,
+      nmc: true,
       hko: true,
       jma: true,
       jtwc: true,
@@ -233,9 +218,9 @@ const app = new Vue({
       .then((typhoonJson) => {
         console.log('API GET');
 
-        // Setting main typhoon temp temporarily
+        // Setting main typhoon temporarily
         const targetTyphoon = _.filter(typhoonJson.data.typhs, typh =>
-          typh.chineseName === '尼莎')[0];
+          typh.chineseName === '諾盧')[0];
 
         _.map(vm.typhoonInfo, (_, key) => {
           vm.typhoonInfo[key] = targetTyphoon[key];
@@ -243,9 +228,8 @@ const app = new Vue({
 
         // setting typhoon's eye
         // TODO: multiple typhoons' eye
-        const cwbOriPoint =
-           _.filter(targetTyphoon.fcstRoutes, route => route.org === 'CWB')[0].points[0];
-        const typhoonEyePosition = this.coords2SvgPosition([cwbOriPoint.lng, cwbOriPoint.lat]);
+        const typhoonEyePosition = this.coords2SvgPosition([
+          targetTyphoon.startLng, targetTyphoon.startLat]);
         vm.typhoonEye.x = typhoonEyePosition[0];
         vm.typhoonEye.y = typhoonEyePosition[1];
 
@@ -253,10 +237,10 @@ const app = new Vue({
         // TODO: multiple typhoons' routes
         // fcstRoutesDays: [ {dateOfMonth, routes:[{org, cx, cy, d}]} ]
         const orgRoutes = targetTyphoon.fcstRoutes;
-        const displayRoutes = _.filter(orgRoutes, orgRoute => orgRoute.points.length > 3);
+        // const displayRoutes = _.filter(orgRoutes, orgRoute => orgRoute.points.length > 3);
 
         // format api data
-        _.forEach(displayRoutes, (routes) => {
+        _.forEach(orgRoutes, (routes) => {
           _.forEach(routes.points, (route) => {
             const pointPosition = this.coords2SvgPosition([route.lng, route.lat]);
             const routeInfo = {
@@ -279,30 +263,20 @@ const app = new Vue({
 
         // fiil d to fcstRoutesDays
         // const lastTempPositions = {};
-        _.forEach(this.fcstRoutesDays, (routesOfDate) => {
+        const previousRoute = {};
+        _.forEach(this.fcstRoutesDays, (routesOfDate, index) => {
           _.forEach(routesOfDate.routes, (route) => {
             const routeInfo = route;
-            let lastRoutes;
-            if (routesOfDate.dateOfMonth === 1) {
-              const monthOfToday = new Date().getMonth();
-              lastRoutes = _.find(this.fcstRoutesDays, routes =>
-                routes.dateOfMonth === DAY_OF_MONTH[monthOfToday + 1]);
+            if (index === 0) {
+              routeInfo.d =
+                  `M${typhoonEyePosition[0]} ${typhoonEyePosition[1]}
+                  L${routeInfo.cx} ${routeInfo.cy}`;
             } else {
-              lastRoutes = _.find(this.fcstRoutesDays, routes =>
-                routes.dateOfMonth === routesOfDate.dateOfMonth - 1);
+              routeInfo.d =
+                  `M${previousRoute[routeInfo.org].cx} ${previousRoute[routeInfo.org].cy}
+                  L${routeInfo.cx} ${routeInfo.cy}`;
             }
-            if (lastRoutes !== undefined) {
-              const lastOrgRoutes = _.find(lastRoutes.routes, lastRoute =>
-                lastRoute.org === route.org);
-              if (lastOrgRoutes === undefined) {
-                routeInfo.d =
-                  `M${typhoonEyePosition[0]} ${typhoonEyePosition[1]} L${routeInfo.cx} ${routeInfo.cy}`;
-              } else {
-                const lastCx = lastOrgRoutes.cx;
-                const lastCy = lastOrgRoutes.cy;
-                routeInfo.d = `M${lastCx} ${lastCy} L${routeInfo.cx} ${routeInfo.cy}`;
-              }
-            }
+            previousRoute[routeInfo.org] = { cx: routeInfo.cx, cy: routeInfo.cy };
           });
         });
 
