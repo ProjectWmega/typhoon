@@ -268,7 +268,7 @@ const app = new Vue({
     },
     addUiAnimation() {
       this.animationSequence.push({
-        e: $('.city g, .grid-line'),
+        e: $('.grid-line'),
         p: 'fadeIn',
         o: {duration: 800}
       });
