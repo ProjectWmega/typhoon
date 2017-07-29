@@ -4,7 +4,6 @@ svg {
   height: calc(100% + 50px);
 }
 .city g,
-.route path,
 .info,
 .point {
   display: none;
