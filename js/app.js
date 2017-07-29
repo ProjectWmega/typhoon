@@ -1,14 +1,3 @@
-// axios.get('../data/route.json').then(data => {
-//   const topLeft = data.coordinate.topLeft;
-//   const downLeft = data.coordinate.downLeft;
-//   const downRight = data.coordinate.downRight;
-//   const topRight = data.coordinate.topRight;
-//   const xRatio = (topRight[0] - topLeft[0]) / 1600;
-//   const yRatio = (topLeft[1] - downLeft[1]) / 900;
-//   const draw = SVG('main-svg');
-//   // const polyline = draw.circle(20).fill('#000').move((data.points[0][0] - topLeft[0]) / xRatio, 900 - (data.points[0][1] - downLeft[1]) / yRatio);
-// });
-
 Vue.prototype.$http = axios;
 
 const TYPHOON_INFO_API = 'http://140.134.26.64:1234/wmega/webapi/typh/getTyphoonInfo';
@@ -114,6 +103,7 @@ const app = new Vue({
     },
     animationSequence: [],
     typhoonEye: { x: 0, y: 0 },
+    pastRoute: [],
     fcstRoutesDays: []
   },
   computed: {
@@ -194,7 +184,46 @@ const app = new Vue({
         });
       });
     },
+    fillTyphoonPastRoute(pastRoute, typhoonEyePosition) {
+      _.each(pastRoute, (route, index) => {
+        const pointPosition = this.coords2SvgPosition([route.lng, route.lat]);
+        let pathD;
+        if (index !== pastRoute.length + 1) {
+          const nextRoute = pastRoute[index + 1];
+          const nextPosition = this.coords2SvgPosition([nextRoute.lng, nextRoute.lat]);
+          pathD = `M${pointPosition[0]} ${pointPosition[1]}
+                L${nextPosition[0]} ${nextPosition[1]}`;
+        } else {
+          pathD = `M${pointPosition[0]} ${pointPosition[1]}
+                L${typhoonEyePosition[0]} ${typhoonEyePosition[1]}`;
+        }
+        this.pastRoute.push({
+          cx: pointPosition[0],
+          cy: pointPosition[1],
+          d: pathD,
+        });
+      });
+    },
     addTyphoonAnimation() {
+      // past route
+      $('.past-route').each((_, pastRoutes) => {
+        const $path = $(pastRoutes).find('.route path');
+        $path.each((_, route) => {
+          const $route = $(route)[0];
+
+          $.Velocity($route, {
+            'stroke-dasharray': calcLength(route),
+            'stroke-dashoffset': calcLength(route)
+          }, 0);
+        });
+        this.animationSequence.push({
+          e: $path,
+          p: {'stroke-dashoffset': 0},
+          o: {duration: 50, easing: 'easeOutCubic'}
+        });
+      });
+
+      // typhoon eye
       $('.eye circle').each((_, eye) => {
         const $this = $(eye);
 
@@ -206,6 +235,7 @@ const app = new Vue({
         });
       });
 
+      // predictive route
       $('.day').each((_, day) => {
         const $path = $(day).find('.route path');
         const $points = $(day).find('.point');
@@ -285,6 +315,9 @@ const app = new Vue({
 
         // fiil d to fcstRoutesDays
         this.fillTyphoonRoute(typhoonEyePosition);
+
+        // fill past route
+        this.fillTyphoonPastRoute(targetTyphoon.pastRoutes, typhoonEyePosition);
       })
       .catch((error) => {
         console.log(error);
