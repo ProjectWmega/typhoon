@@ -78,6 +78,7 @@ const impactLevel = [
 const app = new Vue({
   el: '.app',
   data: {
+    initAnitmaions: true,
     typhoonInfo: {
       chineseName: '颱風',
       englishName: 'typhoon',
@@ -153,6 +154,46 @@ const app = new Vue({
       }
     },
     fillTimeText: time => (String(time).length === 1 ? `0${time}` : String(time)),
+    formatTyphoonApi(orgRoutes) {
+      _.forEach(orgRoutes, (routes) => {
+        _.forEach(routes.points, (route) => {
+          const pointPosition = this.coords2SvgPosition([route.lng, route.lat]);
+          const routeInfo = {
+            org: routes.org.toLowerCase(),
+            cx: pointPosition[0],
+            cy: pointPosition[1],
+            // d for later
+          };
+          const targetRoute = _.find(this.fcstRoutesDays, { dateOfMonth: route.dateOfMonth });
+          if (targetRoute === undefined) {
+            this.fcstRoutesDays.push({
+              dateOfMonth: route.dateOfMonth,
+              routes: [routeInfo],
+            });
+          } else {
+            targetRoute.routes.push(routeInfo);
+          }
+        });
+      });
+    },
+    fillTyphoonRoute(typhoonEyePosition) {
+      const previousRoute = {};
+      _.forEach(this.fcstRoutesDays, (routesOfDate, index) => {
+        _.forEach(routesOfDate.routes, (route) => {
+          const routeInfo = route;
+          if (index === 0) {
+            routeInfo.d =
+                `M${typhoonEyePosition[0]} ${typhoonEyePosition[1]}
+                L${routeInfo.cx} ${routeInfo.cy}`;
+          } else {
+            routeInfo.d =
+                `M${previousRoute[routeInfo.org].cx} ${previousRoute[routeInfo.org].cy}
+                L${routeInfo.cx} ${routeInfo.cy}`;
+          }
+          previousRoute[routeInfo.org] = { cx: routeInfo.cx, cy: routeInfo.cy };
+        });
+      });
+    },
     addTyphoonAnimation() {
       $('.eye circle').each((_, eye) => {
         const $this = $(eye);
@@ -240,46 +281,10 @@ const app = new Vue({
         // const displayRoutes = _.filter(orgRoutes, orgRoute => orgRoute.points.length > 3);
 
         // format api data
-        _.forEach(orgRoutes, (routes) => {
-          _.forEach(routes.points, (route) => {
-            const pointPosition = this.coords2SvgPosition([route.lng, route.lat]);
-            const routeInfo = {
-              org: routes.org.toLowerCase(),
-              cx: pointPosition[0],
-              cy: pointPosition[1],
-              // d for later
-            };
-            const targetRoute = _.find(this.fcstRoutesDays, { dateOfMonth: route.dateOfMonth });
-            if (targetRoute === undefined) {
-              this.fcstRoutesDays.push({
-                dateOfMonth: route.dateOfMonth,
-                routes: [routeInfo]
-              });
-            } else {
-              targetRoute.routes.push(routeInfo);
-            }
-          });
-        });
+        this.formatTyphoonApi(orgRoutes);
 
         // fiil d to fcstRoutesDays
-        // const lastTempPositions = {};
-        const previousRoute = {};
-        _.forEach(this.fcstRoutesDays, (routesOfDate, index) => {
-          _.forEach(routesOfDate.routes, (route) => {
-            const routeInfo = route;
-            if (index === 0) {
-              routeInfo.d =
-                  `M${typhoonEyePosition[0]} ${typhoonEyePosition[1]}
-                  L${routeInfo.cx} ${routeInfo.cy}`;
-            } else {
-              routeInfo.d =
-                  `M${previousRoute[routeInfo.org].cx} ${previousRoute[routeInfo.org].cy}
-                  L${routeInfo.cx} ${routeInfo.cy}`;
-            }
-            previousRoute[routeInfo.org] = { cx: routeInfo.cx, cy: routeInfo.cy };
-          });
-        });
-
+        this.fillTyphoonRoute(typhoonEyePosition);
       })
       .catch((error) => {
         console.log(error);
@@ -290,11 +295,14 @@ const app = new Vue({
     $('.draggable').draggabilly();
   },
   updated() {
-    // setting animations
-    this.addTyphoonAnimation();
-    this.addUiAnimation();
-    setTimeout(() => {
-      $.Velocity.RunSequence(this.animationSequence);
-    }, 500);
+    if (this.initAnitmaions) {
+      // setting animations
+      this.addTyphoonAnimation();
+      this.addUiAnimation();
+      setTimeout(() => {
+        $.Velocity.RunSequence(this.animationSequence);
+      }, 500);
+      this.initAnitmaions = false;
+    }
   }
 })
