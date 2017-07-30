@@ -4,10 +4,9 @@ svg {
   height: calc(100% + 50px);
 }
 .city g,
-.route path,
 .info,
 .point {
-  display: none;
+  /* display: none; */
 }
 
 /* General style */
@@ -42,7 +41,7 @@ svg {
 /* Grid line */
 
 .grid-line {
-  display: none;
+  /* display: none; */
 }
 .latitude-line {
   fill: none;
@@ -90,42 +89,42 @@ svg {
   stroke-width: 3;
   stroke-miterlimit: 10;
 }
-.route .hk {
+.route .hko {
   stroke: #C795A2;
 }
-.route .kr {
+.route .kma {
   stroke: #A76664;
 }
-.route .tw {
+.route .cwb {
   stroke: #6B9871;
 }
-.route .usa {
+.route .jtwc {
   stroke: #7AB0CA;
 }
-.route .cn {
+.route .nmc {
   stroke: #D2B86F;
 }
-.route .jp {
+.route .jma {
   stroke: #C69370;
 }
 
 /* Point of route */
-.point .usa {
+.point .jtwc {
   fill: #7AB0CA;
 }
-.point .jp {
+.point .jma {
   fill: #C69370;
 }
-.point .hk {
+.point .hko {
   fill: #C795A2;
 }
-.point .kr {
+.point .kma {
   fill: #A76664;
 }
-.point .cn {
+.point .nmc {
   fill: #D2B86F;
 }
-.point .tw {
+.point .cwb {
   fill: #6B9871;
 }
 
