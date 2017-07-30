@@ -91,8 +91,6 @@ const app = new Vue({
       kma: '大韓民國氣象廳'
     },
     routeSelector: {
-      all: false,
-      disableAll: false,
       avg: true,
       cwb: true,
       nmc: true,
@@ -104,7 +102,11 @@ const app = new Vue({
     animationSequence: [],
     typhoonEye: { x: 0, y: 0 },
     pastRoute: [],
-    fcstRoutesDays: []
+    fcstRoutesDays: [],
+    mapInfo: {
+      gcs: true,
+      cities: false,
+    },
   },
   computed: {
     updateTimeText() {
@@ -118,7 +120,13 @@ const app = new Vue({
 
       return `${formatedYear}.${formatedMonth}.${formatedDay}
         ${formatedHour}:${formatMinuts}`;
-    }
+    },
+    isSelectAllRoutes() {
+      return _.every(this.routeSelector, route => route === true);
+    },
+    isDisableAllRoutes() {
+      return _.every(this.routeSelector, route => route === false);
+    },
   },
   methods: {
     typhoonLevelText: level => {
@@ -188,7 +196,7 @@ const app = new Vue({
       _.each(pastRoute, (route, index) => {
         const pointPosition = this.coords2SvgPosition([route.lng, route.lat]);
         let pathD;
-        if (index !== pastRoute.length + 1) {
+        if (index !== pastRoute.length - 1) {
           const nextRoute = pastRoute[index + 1];
           const nextPosition = this.coords2SvgPosition([nextRoute.lng, nextRoute.lat]);
           pathD = `M${pointPosition[0]} ${pointPosition[1]}
@@ -268,12 +276,7 @@ const app = new Vue({
     },
     addUiAnimation() {
       this.animationSequence.push({
-        e: $('.grid-line'),
-        p: 'fadeIn',
-        o: {duration: 800}
-      });
-      this.animationSequence.push({
-        e: $('.info-box, .route-selector'),
+        e: $('.info-box'),
         p: 'fadeIn',
         o: {duration: 300}
       });
@@ -291,7 +294,7 @@ const app = new Vue({
 
         // Setting main typhoon temporarily
         const targetTyphoon = _.filter(typhoonJson.data.typhs, typh =>
-          typh.chineseName === '尼莎')[0];
+          typh.chineseName === '海棠')[0];
 
         _.map(vm.typhoonInfo, (_, key) => {
           vm.typhoonInfo[key] = targetTyphoon[key];
@@ -323,9 +326,8 @@ const app = new Vue({
         console.log(error);
       });
   },
-  mounted () {
+  mounted() {
     // initialize
-    $('.draggable').draggabilly();
   },
   updated() {
     if (this.initAnitmaions) {

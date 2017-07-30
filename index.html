@@ -26,39 +26,6 @@
         </div>
       </div>
     </nav>
-    <div class="route-selector draggable">
-      <h4 class="title">各國颱風預測路徑選擇</h4>
-      <div class="multi-select">
-        <div class="route">
-          <button class="btn-route" :class="{ active: routeSelector.all }" @click="selectAllRoute" data-route="all"></button>
-          <span class="setting-label">全選</span>
-        </div>
-        <div class="route">
-          <button class="btn-route" :class="{ active: routeSelector.disableAll }" @click="disableAllRoute"  data-route="none"></button>
-          <span class="setting-label">全不選</span>
-        </div>
-      </div>
-      <div class="route">
-        <button class="btn-route" :class="{ active: routeSelector.avg }" @click="routeSelector.avg = !routeSelector.avg" data-route="avg"></button>
-        <span class="setting-label">各國平均路徑</span>
-      </div>
-      <div class="route" v-for="(text, id) in routes">
-        <button class="btn-route" :class="{ active: routeSelector[id] }" @click="routeSelector[id] = !routeSelector[id]" :data-route="id"></button>
-        <span class="setting-label">{{text}} ({{id.toUpperCase()}})</span>
-      </div>
-      <hr>
-      <h4 class="title">地圖資訊選擇</h4>
-      <div class="multi-select">
-        <div class="info">
-          <button class="btn-toggle" data-toggle="city"></button>
-          <span class="setting-label">城市</span>
-        </div>
-        <div class="info">
-          <button class="btn-toggle" data-toggle="grid-line"></button>
-          <span class="setting-label">經緯度</span>
-        </div>
-      </div>
-    </div>
     <div class="info-box">
       <div class="info-title">
         <img src="img/exclamation-triangle.png" class="exclamation-triangle">
@@ -104,6 +71,61 @@
         </div>
         <div class="clearfix"></div>
       </div>
+      <div class="well selector">
+        <h5>颱風路徑選擇</h5>
+        <div class="inline-selector">
+          <button class="btn-route" :class="{ active: isSelectAllRoutes }" @click="selectAllRoute" data-route="all"></button>
+          <span class="setting-label">路徑全選</span>
+        </div>
+        <div class="inline-selector">
+          <button class="btn-route" :class="{ active: isDisableAllRoutes }" @click="disableAllRoute"  data-route="none"></button>
+          <span class="setting-label">全不選</span>
+        </div>
+        <div class="avg-route">
+          <button class="btn-route" :class="{ active: routeSelector.avg }" @click="routeSelector.avg = !routeSelector.avg" data-route="avg"></button>
+          <span class="setting-label">各國平均路徑</span>
+        </div>
+        <div class="routes-list">
+          <div class="routes-list-part">
+            <div class="route-choice">
+              <button class="btn-route" :class="{ active: routeSelector.hko }" @click="routeSelector.hko = !routeSelector.hko" data-route="hko"></button>
+              <span class="setting-label">香港天文台 (HKO)</span>
+            </div>
+            <div class="route-choice">
+              <button class="btn-route" :class="{ active: routeSelector.jma }" @click="routeSelector.jma = !routeSelector.jma" data-route="jma"></button>
+              <span class="setting-label">日本氣象廳 (JMA)</span>
+            </div>
+
+            <div class="route-choice">
+              <button class="btn-route" :class="{ active: routeSelector.cwb }" @click="routeSelector.cwb = !routeSelector.cwb" data-route="cwb"></button>
+              <span class="setting-label">中央氣象局 (CWB)</span>
+            </div>
+          </div>
+          <div class="routes-list-part" style="margin-left: 0.5em;">
+            <div class="route-choice">
+              <button class="btn-route" :class="{ active: routeSelector.kma }" @click="routeSelector.kma = !routeSelector.kma" data-route="kma"></button>
+              <span class="setting-label">大韓民國氣象廳 (KMA)</span>
+            </div>
+            <div class="route-choice">
+              <button class="btn-route" :class="{ active: routeSelector.nmc }" @click="routeSelector.nmc = !routeSelector.nmc" data-route="nmc"></button>
+              <span class="setting-label">中國氣象局 (NMC)</span>
+            </div>
+            <div class="route-choice">
+              <button class="btn-route" :class="{ active: routeSelector.jtwc }" @click="routeSelector.jtwc = !routeSelector.jtwc" data-route="jtwc"></button>
+              <span class="setting-label">美軍聯合颱風警報中心 (JTWC)</span>
+            </div>
+          </div>
+        </div>
+        <h5>地圖資訊切換</h5>
+        <div class="inline-selector">
+          <button class="btn-route" :class="{ active: mapInfo.gcs }" @click="mapInfo.gcs = !mapInfo.gcs" data-toggle="city"></button>
+          <span class="setting-label">經緯度</span>
+        </div>
+        <div class="inline-selector">
+          <button class="btn-route" :class="{ active: mapInfo.cities }" @click="mapInfo.cities = !mapInfo.cities" data-toggle="grid-line"></button>
+          <span class="setting-label">主要城市</span>
+        </div>
+      </div>
     </div>
     <svg viewBox="0 0 1600 900" id="main-svg">
       <g id="map">
@@ -118,7 +140,7 @@
         <path d="M457.7 704.7l-1.3-.6-1-1-1.4-1-1 .5-.4 1.2-.3 5 .2 1 1 1.5 1.2 1 .5 1 .3.8 1 10 .6 2.2 1.2 2.7.8 2.7.2 3.4 1 3.2 1.3 1.2 1.8-.2 1 .4.7 2.7 2 1.8.7 3 1 1 1.4.3h1.6l.8-1-.2-2.8-.8-4.2.8-2.8 1.4 1.5 1.7 1 2.3.5 2 1 1.3 1.8.2 2-.8 1.7-5.6 5-1 1-.8 1.4v4.7l.5 4.8 2.3-2.3 2.7.4 2.2 3h1.8l2 2 2.8.8 3.4-.2 2.4-1.5.2-2 1.3-1 3.4-2 1-.4 1.3-.2 1 .2 7 3.6 3.2 3.4 4.2 3 .7.8 2.2 3.2.4 1.2v1.3l2 1.7 2-1.4-.3-3.5-1.4-3-.3-1-2.2-2.4v-2.6l-.3-1.4-.6-1.6.3-1h1.4l1.3.5 4.5 4.2 2 3 .8.5 6.4 3.7.7 1 .4 1 2 3.5v2.8l.5 1.4 2.2.3 5.5 3 2.6.3 1.6-.3 1.5-.5 1.3-.3.7.5-1.2 2.7-.5 2.8 2 2.3 2.5.7 1.8-5.5v-6l-.8.3h-.8L554 781l-2-.4-2.2.2.7-2v-2l-1.2-2-1.5-2-2.3-2.2-1.4-3 1.5-1.3 4.8-.4 1.2-2-1-1-2-1-1.2-.5H546l-4.8-1.6-1.3-1.7-1.5-.8-1 1-.5 1 1.2 1-.2 2.5-1.6 2.2h-3.2l-1-1v-1.4l.3-1.4V760l-1.4-3-1.8-2.6-2-1.5-2.2-1-3.3-.7h-3.3l-2.5 1.3-2.6 1.8-1 .3-1 .7v1l1.8 1.5.3 1-1.4.5-.3 1.2H510l-1.5-.4-4-1.8-1.5-1-1.3-1.3-.8-1.3-.5-1.7-2.5-6-.5-2.5v-2.5l1.7-1.3-.3-.7-.7-.6-2.8-5-2.6-5.5-1-1.2-.2-1.4.5-1.2 1-1 1-2.3 2-2.7.7-1.2v-1.3l-.4-1.3-.7-1 .8-2.8 2-2 2.6-1.5 4.5-2 3.8-.6 2-4 .2-2 5-9.7 1-4 .7-1.8.4-1.7-1-.8-1.6-.6-.3-1.5v-1.7l-.7-1-2.2-1.2-.7-1-1.5-3.5-.5-2v-2.3l.6-7.7 1-2.3 1.7-2 .5-2-.4-2-.8-1.4-1-1-2 .3-1.6 2.8-1 1-2 1.2-2.6-.3-3-.8-3-1.2-8.3-4.7-3.7-1.2h-1.2l-3 .7-1.5-.2H478l-2.5 1.3-2.7 1-.3 3.5-1 2.6-1 2.6-3.5 13 .3 2.5 1.4 2.5v1.5l-.3 2.7.3 4.4-.3 3.4-2 4.8-.5 3v2.8l.5 3 1.5 4.5v1.5l-.5 1.3-.7 1-1.6.4H462l-1-.3-2-3zM507.6 362.3l1 .3 2 1.7v-1l-1.2-2.2-1.3.4z" class="country"/>
         <path d="M505.5 755.2l5.2 3.6v-1l-5-4.3-.5.5v.6zM504.4 742.7l.5.3 1.3-.2.8-2.3-1.2-3.3 1.2-1.8.3-.2h.5l-.4-.8-1.5-1-3.3.2-.5 1.8 1 1.2.7 2 .7.8.3 1.6-.3.5zM550.8 503.5l1.5-.4 1-1v-1l-4-1.3-.3.6v1l-1.8 1v.6h1.7z" class="country"/>
       </g>
-      <g class="grid-line">
+      <g class="grid-line" v-show="mapInfo.gcs">
         <line class="latitude-line" x1="12" y1="900" x2="1593" y2="900"/>
         <line class="latitude-line" x1="12" y1="609" x2="1593" y2="609"/>
         <line class="latitude-line" x1="12" y1="482" x2="1593" y2="482"/>
@@ -243,7 +265,7 @@
           <text transform="matrix(1 0 0 1 10.5005 106.2959)" class="white">40</text>
         </g>
       </g>
-      <g class="city">
+      <g class="city" v-show="mapInfo.cities">
         <g>
           <path class="city-name-background" d="M141.7,800.2c0,1-0.8,1.8-1.8,1.8h-32.2c-1,0-1.8-0.8-1.8-1.8v-14.8c0-1,0.8-1.8,1.8-1.8
             H140c1,0,1.8,0.8,1.8,1.8V800.2z"/>
@@ -431,7 +453,6 @@
   <script src="bower_components/jquery-sticky/jquery.sticky.js"></script>
   <script src="bower_components/vue/dist/vue.js"></script>
   <script src="bower_components/lodash/dist/lodash.min.js"></script>
-  <script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
   <script src="bower_components/svg.js/dist/svg.min.js"></script>
   <script src="js/app.js"></script>
 </body>

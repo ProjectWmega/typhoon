@@ -6,7 +6,7 @@ svg {
 .city g,
 .info,
 .point {
-  display: none;
+  /* display: none; */
 }
 
 /* General style */
@@ -41,7 +41,7 @@ svg {
 /* Grid line */
 
 .grid-line {
-  display: none;
+  /* display: none; */
 }
 .latitude-line {
   fill: none;
