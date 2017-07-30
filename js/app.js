@@ -112,14 +112,17 @@ const app = new Vue({
     updateTimeText() {
       const releaseDate = new Date(this.typhoonInfo.updateTime);
 
-      const formatedYear = this.fillTimeText(releaseDate.getFullYear());
-      const formatedMonth = this.fillTimeText(releaseDate.getMonth() + 1);
-      const formatedDay = this.fillTimeText(releaseDate.getDate());
-      const formatedHour = this.fillTimeText(releaseDate.getHours());
-      const formatMinuts = this.fillTimeText(releaseDate.getMinutes());
+      const formatedYear = this.fillSingleNum2Text(releaseDate.getFullYear());
+      const formatedMonth = this.fillSingleNum2Text(releaseDate.getMonth() + 1);
+      const formatedDay = this.fillSingleNum2Text(releaseDate.getDate());
+      const formatedHour = this.fillSingleNum2Text(releaseDate.getHours());
+      const formatMinuts = this.fillSingleNum2Text(releaseDate.getMinutes());
 
       return `${formatedYear}.${formatedMonth}.${formatedDay}
         ${formatedHour}:${formatMinuts}`;
+    },
+    formatTyphoonNumber() {
+      return this.fillSingleNum2Text(this.typhoonInfo.number);
     },
     isSelectAllRoutes() {
       return _.every(this.routeSelector, route => route === true);
@@ -151,7 +154,7 @@ const app = new Vue({
         this.routeSelector[key] = false;
       }
     },
-    fillTimeText: time => (String(time).length === 1 ? `0${time}` : String(time)),
+    fillSingleNum2Text: num => (String(num).length === 1 ? `0${num}` : String(num)),
     formatTyphoonApi(orgRoutes) {
       _.forEach(orgRoutes, (routes) => {
         _.forEach(routes.points, (route) => {

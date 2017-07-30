@@ -47,7 +47,7 @@
       </div>
       <div class="well typhoon-info">
         <div>
-          <div class="number">{{typhoonInfo.number}}</div>
+          <div class="number">{{formatTyphoonNumber}}</div>
           <h1 class="title">{{typhoonInfo.chineseName}} ({{typhoonInfo.englishName}})</h1>
           <small :class="['level', typhoonLevelClass(typhoonInfo.typhoonLevel)]">
             <span class="level-text">{{typhoonLevelText(typhoonInfo.typhoonLevel)}}</span>
