@@ -73,48 +73,9 @@ hr {
   transform: translateY(0);
 }
 
-.route-selector {
-  display: none;
-  padding: .5em;
-  position: fixed;
-  top: calc(57px + 1em);
-  left: 2%;
-  z-index: 2;
-  font-size: .8em;
-  background-color: #6f7070;
-  color: #cccccc;
-  cursor: move;
-}
-
-.multi-select .route,
-.multi-select .info {
-  display: inline-block !important;
-  width: 40%;
-}
-
 .route .setting-label,
 .info .setting-label {
   vertical-align: text-bottom;
-}
-
-.route-selector .title {
-  margin: 5px 0;
-  color: #ffffff;
-}
-
-.route-selector .route,
-.route-selector .info {
-  margin: 3px 0;
-}
-
-.route-selector .btn-route,
-.route-selector .btn-toggle {
-  width: 1.5em;
-  height: 1.5em;
-  padding: 0;
-  border: 2px #eeeeee solid;
-  background-color: #ffffff;
-  outline: none;
 }
 
 .btn-route.active[data-route=avg] {
@@ -313,7 +274,7 @@ h2.second-title {
   padding-left: 1em;
 }
 
- .selector {
+.selector {
   font-size: 14px;
 }
 
