@@ -1,6 +1,6 @@
 Vue.prototype.$http = axios;
 
-const TYPHOON_INFO_API = 'http://140.134.26.64:1234/wmega/webapi/typh/getTyphoonInfo';
+const TYPHOON_INFO_API = 'https://api.wmega.tw/wmega/webapi/typh/getTyphoonInfo';
 const CORNER_COORDS = {
   topLeft: [101.074, 43.97638],
   downLeft: [101.074, 8.5433],
