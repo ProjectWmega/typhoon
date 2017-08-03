@@ -1,4 +1,4 @@
-[v-cloak] {
+ [v-cloak] {
   display: none;
 }
 
@@ -348,4 +348,22 @@ h2.second-title {
 .routes-list-part {
   display: flex;
   flex-direction: column;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+input[type=radio] + label span {
+  display: inline-block;
+  background-color: #ffffff;
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+input[type=radio]:checked + label span {
+  background-color: #555;
 }

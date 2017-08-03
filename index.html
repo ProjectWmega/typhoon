@@ -116,14 +116,32 @@
             </div>
           </div>
         </div>
-        <h5>地圖資訊切換</h5>
-        <div class="inline-selector">
-          <button class="btn-route" :class="{ active: mapInfo.gcs }" @click="mapInfo.gcs = !mapInfo.gcs" data-toggle="city"></button>
-          <span class="setting-label">經緯度</span>
+        <div class="map-info">
+          <h5>地圖資訊切換</h5>
+          <div class="inline-selector">
+            <button class="btn-route" :class="{ active: mapInfo.gcs }" @click="mapInfo.gcs = !mapInfo.gcs" data-toggle="city"></button>
+            <span class="setting-label">經緯度</span>
+          </div>
+          <div class="inline-selector">
+            <button class="btn-route" :class="{ active: mapInfo.cities }" @click="mapInfo.cities = !mapInfo.cities" data-toggle="grid-line"></button>
+            <span class="setting-label">主要城市</span>
+          </div>
         </div>
-        <div class="inline-selector">
-          <button class="btn-route" :class="{ active: mapInfo.cities }" @click="mapInfo.cities = !mapInfo.cities" data-toggle="grid-line"></button>
-          <span class="setting-label">主要城市</span>
+        <div class="typhoon-selector">
+          <h5>颱風選擇</h5>
+          <div class="inline-selector" v-for="typh in typhoons">
+            <input type="radio"
+                   name="typhoon"
+                   class="radio-typhoon"
+                   :id="typh.info.number"
+                   :value="typh.info.number"
+                   :checked="typh.info.number === typhoonInfo.number"
+                   @click="typhoonSelected(typh.info.number)"></input>
+            <label class="setting-label" :for="typh.info.number">
+              <span></span>
+              ({{fillSingleNum2Text(typh.info.number)}}){{typh.info.chineseName}}
+            </label>
+          </div>
         </div>
       </div>
     </div>
@@ -415,14 +433,6 @@
         <g class="route">
           <path class="past-path" :d="route.d" stroke="#898787"></path>
         </g>
-        <g class="point">
-          <circle class="past-point"
-                  :cx="route.cx"
-                  :cy="route.cy"
-                  r="3.3"
-                  fill="#898787">
-          </circle>
-        </g>
       </g>
       <g class="eye">
         <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="10" class="grey-white"></circle>
@@ -434,7 +444,7 @@
         <g class="route">
           <path v-for="route in routesOfDate.routes" :class="route.org" :d="route.d" v-show="routeSelector[route.org]"></path>
         </g>
-        <g class="point">
+        <g class="point" :style="phointStyle">
           <circle v-for="route in routesOfDate.routes"
                   :class="route.org"
                   :cx="route.cx"

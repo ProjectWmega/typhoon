@@ -68,6 +68,7 @@ const app = new Vue({
   el: '.app',
   data: {
     initAnitmaions: true,
+    typhoons: [],
     typhoonInfo: {
       chineseName: '颱風',
       englishName: 'typhoon',
@@ -106,6 +107,10 @@ const app = new Vue({
     mapInfo: {
       gcs: true,
       cities: false,
+    },
+    typhoonSelect: 0,
+    phointStyle: {
+      display: 'none',
     },
   },
   computed: {
@@ -156,6 +161,7 @@ const app = new Vue({
     },
     fillSingleNum2Text: num => (String(num).length === 1 ? `0${num}` : String(num)),
     formatTyphoonApi(orgRoutes) {
+      const fcstRoutesDays = [];
       _.forEach(orgRoutes, (routes) => {
         _.forEach(routes.points, (route) => {
           const pointPosition = this.coords2SvgPosition([route.lng, route.lat]);
@@ -165,9 +171,9 @@ const app = new Vue({
             cy: pointPosition[1],
             // d for later
           };
-          const targetRoute = _.find(this.fcstRoutesDays, { dateOfMonth: route.dateOfMonth });
+          const targetRoute = _.find(fcstRoutesDays, { dateOfMonth: route.dateOfMonth });
           if (targetRoute === undefined) {
-            this.fcstRoutesDays.push({
+            fcstRoutesDays.push({
               dateOfMonth: route.dateOfMonth,
               routes: [routeInfo],
             });
@@ -176,10 +182,11 @@ const app = new Vue({
           }
         });
       });
+      return fcstRoutesDays;
     },
-    fillTyphoonRoute(typhoonEyePosition) {
+    fillTyphoonRoute(fcstRoutesDays, typhoonEyePosition) {
       const previousRoute = {};
-      _.forEach(this.fcstRoutesDays, (routesOfDate, index) => {
+      _.forEach(fcstRoutesDays, (routesOfDate, index) => {
         _.forEach(routesOfDate.routes, (route) => {
           const routeInfo = route;
           if (index === 0) {
@@ -196,6 +203,7 @@ const app = new Vue({
       });
     },
     fillTyphoonPastRoute(pastRoute, typhoonEyePosition) {
+      const pastRouteData = [];
       _.each(pastRoute, (route, index) => {
         const pointPosition = this.coords2SvgPosition([route.lng, route.lat]);
         let pathD;
@@ -208,12 +216,13 @@ const app = new Vue({
           pathD = `M${pointPosition[0]} ${pointPosition[1]}
                 L${typhoonEyePosition[0]} ${typhoonEyePosition[1]}`;
         }
-        this.pastRoute.push({
+        pastRouteData.push({
           cx: pointPosition[0],
           cy: pointPosition[1],
           d: pathD,
         });
       });
+      return pastRouteData;
     },
     addTyphoonAnimation() {
       // past route
@@ -288,42 +297,79 @@ const app = new Vue({
       return [(coords[0] - CORNER_COORDS.topLeft[0]) / X_RATIO,
         900 - ((coords[1] - CORNER_COORDS.downLeft[1]) / Y_RATIO)];
     },
+    typhoonSelected(number) {
+      this.typhoonSelect = number;
+      this.setCurrentTyphoon(this.typhoonSelect);
+      this.phointStyle = {
+        display: 'block',
+      };
+    },
+    setCurrentTyphoon(number) {
+      const targetTyphoon = _.find(this.typhoons, typh =>
+        typh.info.number === number);
+
+      this.typhoonInfo = targetTyphoon.info;
+      this.typhoonEye = targetTyphoon.typhoonEye;
+      this.fcstRoutesDays = targetTyphoon.fcstRoutesDays;
+      this.pastRoute = targetTyphoon.pastRoute;
+    },
   },
   created() {
     const vm = this;
     this.$http.get(TYPHOON_INFO_API)
       .then((typhoonJson) => {
         console.log('API GET');
+        _.forEach(typhoonJson.data.typhs, (targetTyphoon) => {
+          const typh = {
+            info: {
+              chineseName: '',
+              englishName: '',
+              gust: '',
+              impactLevel: 0,
+              typhoonLevel: 0,
+              level7Radius: '',
+              level10Radius: '',
+              windDirection: '',
+              maxWind: '',
+              number: 0,
+              pressure: '',
+              updateTime: '',
+            },
+            pastRoute: [],
+            fcstRoutesDays: [],
+            typhoonEye: { x: 0, y: 0 },
+          };
+          _.map(vm.typhoonInfo, (_, key) => {
+            typh.info[key] = targetTyphoon[key];
+          });
 
-        // Setting main typhoon temporarily
-        const targetTyphoon = _.filter(typhoonJson.data.typhs, typh =>
-          typh.chineseName === '海棠')[0];
+          const typhoonEyePosition = this.coords2SvgPosition([
+            targetTyphoon.startLng, targetTyphoon.startLat]);
+          typh.typhoonEye.x = typhoonEyePosition[0];
+          typh.typhoonEye.y = typhoonEyePosition[1];
 
-        _.map(vm.typhoonInfo, (_, key) => {
-          vm.typhoonInfo[key] = targetTyphoon[key];
+          const orgRoutes = targetTyphoon.fcstRoutes;
+          // format api data
+          typh.fcstRoutesDays = this.formatTyphoonApi(orgRoutes);
+
+          // fiil d to fcstRoutesDays
+          this.fillTyphoonRoute(typh.fcstRoutesDays, typhoonEyePosition);
+
+          // fill past route
+          typh.pastRoute = this.fillTyphoonPastRoute(targetTyphoon.pastRoutes, typhoonEyePosition);
+          this.typhoons.push(typh);
         });
 
-        // setting typhoon's eye
-        // TODO: multiple typhoons' eye
-        const typhoonEyePosition = this.coords2SvgPosition([
-          targetTyphoon.startLng, targetTyphoon.startLat]);
-        vm.typhoonEye.x = typhoonEyePosition[0];
-        vm.typhoonEye.y = typhoonEyePosition[1];
+        // Setting main typhoon temporarily
+        const targetTyphoon = _.find(this.typhoons, typh =>
+          typh.info.chineseName === '諾盧');
 
-        // format typhoon's routes
-        // TODO: multiple typhoons' routes
-        // fcstRoutesDays: [ {dateOfMonth, routes:[{org, cx, cy, d}]} ]
-        const orgRoutes = targetTyphoon.fcstRoutes;
-        // const displayRoutes = _.filter(orgRoutes, orgRoute => orgRoute.points.length > 3);
+        vm.typhoonSelect = targetTyphoon.info.number;
 
-        // format api data
-        this.formatTyphoonApi(orgRoutes);
-
-        // fiil d to fcstRoutesDays
-        this.fillTyphoonRoute(typhoonEyePosition);
-
-        // fill past route
-        this.fillTyphoonPastRoute(targetTyphoon.pastRoutes, typhoonEyePosition);
+        vm.typhoonInfo = targetTyphoon.info;
+        vm.typhoonEye = targetTyphoon.typhoonEye;
+        vm.fcstRoutesDays = targetTyphoon.fcstRoutesDays;
+        vm.pastRoute = targetTyphoon.pastRoute;
       })
       .catch((error) => {
         console.log(error);

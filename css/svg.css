@@ -4,9 +4,9 @@ svg {
   height: calc(100% + 50px);
 }
 
-.point {
-   display: none;
-}
+/* .point {
+  display: none;
+} */
 
 /* General style */
 .brown {
