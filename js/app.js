@@ -75,8 +75,8 @@ const app = new Vue({
       gust: '65m/s（17級風）',
       impactLevel: 0,
       typhoonLevel: 0,
-      level7Radius: '180km',
-      level10Radius: '--km',
+      level7Radius: 0,
+      level10Radius: 0,
       windDirection: '東北，20km/hr',
       maxWind: '45m/s（13級風）',
       number: 13,
@@ -134,6 +134,12 @@ const app = new Vue({
     },
     isDisableAllRoutes() {
       return _.every(this.routeSelector, route => route === false);
+    },
+    level7Radius() {
+      return (parseInt(this.typhoonInfo.level7Radius, 10) * (1 / 111)) / Y_RATIO;
+    },
+    level10Radius() {
+      return (parseInt(this.typhoonInfo.level10Radius, 10) * (1 / 111)) / Y_RATIO;
     },
   },
   methods: {
@@ -232,8 +238,8 @@ const app = new Vue({
           const $route = $(route)[0];
 
           $.Velocity($route, {
-            'stroke-dasharray': 500,
-            'stroke-dashoffset': 500
+            'stroke-dasharray': 5000,
+            'stroke-dashoffset': 5000
           }, 0);
         });
         this.animationSequence.push({

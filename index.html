@@ -437,8 +437,8 @@
       </g>
       <g class="eye">
         <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="10" class="grey-white"></circle>
-        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="28" class="red transparent"></circle>
-        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="55" class="yellow transparent"></circle>
+        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" :r="level10Radius" class="red transparent"></circle>
+        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" :r="level7Radius" class="yellow transparent"></circle>
         <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="7" class="brown"></circle>
       </g>
       <g class="day" v-for="routesOfDate in fcstRoutesDays">
