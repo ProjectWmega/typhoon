@@ -189,7 +189,7 @@ const app = new Vue({
       _.forEach(fcstRoutesDays, (routesOfDate, index) => {
         _.forEach(routesOfDate.routes, (route) => {
           const routeInfo = route;
-          if (index === 0) {
+          if (previousRoute[routeInfo.org] === undefined) {
             routeInfo.d =
                 `M${typhoonEyePosition[0]} ${typhoonEyePosition[1]}
                 L${routeInfo.cx} ${routeInfo.cy}`;
