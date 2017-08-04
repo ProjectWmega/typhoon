@@ -232,8 +232,8 @@ const app = new Vue({
           const $route = $(route)[0];
 
           $.Velocity($route, {
-            'stroke-dasharray': calcLength(route),
-            'stroke-dashoffset': calcLength(route)
+            'stroke-dasharray': 500,
+            'stroke-dashoffset': 500
           }, 0);
         });
         this.animationSequence.push({
