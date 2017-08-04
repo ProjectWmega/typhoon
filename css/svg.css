@@ -88,6 +88,9 @@ svg {
   stroke-width: 3;
   stroke-miterlimit: 10;
 }
+.past-route .route {
+  stroke-width: 5;
+}
 .route .hko {
   stroke: #C795A2;
 }

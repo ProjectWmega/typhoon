@@ -245,7 +245,7 @@ const app = new Vue({
         this.animationSequence.push({
           e: $path,
           p: {'stroke-dashoffset': 0},
-          o: {duration: 50, easing: 'easeOutCubic'}
+          o: {duration: 20, easing: 'easeOutCubic'}
         });
       });
 
@@ -324,7 +324,6 @@ const app = new Vue({
     const vm = this;
     this.$http.get(TYPHOON_INFO_API)
       .then((typhoonJson) => {
-        console.log('API GET');
         _.forEach(typhoonJson.data.typhs, (targetTyphoon) => {
           const typh = {
             info: {
