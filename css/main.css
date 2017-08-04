@@ -1,9 +1,13 @@
- [v-cloak] {
-  display: none;
+* {
+  font-family: "Lucida Grande","Lucida Sans Unicode", "微軟正黑體", "Microsoft JhengHei", Helvetica, Arial, sans-serif;
 }
 
 hr {
   margin: 10px 0;
+}
+
+[v-cloak] {
+  display: none;
 }
 
 .clearfix {
