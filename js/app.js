@@ -298,7 +298,14 @@ const app = new Vue({
       this.animationSequence.push({
         e: $('.info-box'),
         p: 'fadeIn',
-        o: {duration: 300}
+        o: {
+          duration: 300,
+          complete: elements => {
+            setTimeout(() => {
+              this.hideInfoBox = true;
+            }, 1000);
+          }
+        }
       });
     },
     coords2SvgPosition: coords => {
