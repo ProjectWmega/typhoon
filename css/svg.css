@@ -81,11 +81,11 @@ svg {
 /* Route */
 .route {
   fill: none;
-  stroke-width: 2;
+  stroke-width: 2.5;
   stroke-miterlimit: 10;
 }
 .past-route .route {
-  stroke-width: 2;
+  stroke-width: 2.5;
 }
 .route .hko {
   stroke: #C795A2;

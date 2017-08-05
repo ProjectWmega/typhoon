@@ -430,8 +430,7 @@
       <g class="eye">
         <circle :cx="typhoonEye.x" :cy="typhoonEye.y" :r="level7Radius" class="yellow transparent"></circle>
         <circle :cx="typhoonEye.x" :cy="typhoonEye.y" :r="level10Radius" class="red transparent"></circle>
-        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="5" class="grey-white"></circle>
-        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="3" class="brown"></circle>
+        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="5" class="brown"></circle>
       </g>
       <g class="day" v-for="routesOfDate in fcstRoutesDays">
         <g class="route">
@@ -442,7 +441,7 @@
                   :class="route.org"
                   :cx="route.cx"
                   :cy="route.cy"
-                  r="6.3"
+                  r="4"
                   v-show="routeSelector[route.org]">
           </circle>
         </g>
