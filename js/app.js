@@ -1,7 +1,7 @@
 Vue.prototype.$http = axios;
 
 const DEBUG_MODE = false;
-const TYPHOON_INFO_API = DEBUG_MODE ? '/fake-data.json' : 'https://api.wmega.tw/wmega/webapi/typh/getTyphoonInfo';
+const TYPHOON_INFO_API = DEBUG_MODE ? './fake-data.json' : 'https://api.wmega.tw/wmega/webapi/typh/getTyphoonInfo';
 const CORNER_COORDS = {
   topLeft: [101.074, 43.97638],
   downLeft: [101.074, 8.5433],
