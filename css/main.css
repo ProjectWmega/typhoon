@@ -132,6 +132,7 @@ hr {
 
 .info-title {
   display: table;
+  padding: 0 5px;
 }
 
 .info-title .exclamation-triangle {
