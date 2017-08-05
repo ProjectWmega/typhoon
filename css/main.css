@@ -180,36 +180,6 @@ h2.second-title {
   font-size: 2em;
 }
 
-.alert-box {
-  text-align: center;
-  padding: 5px;
-}
-
-.alert-box .title {
-  font-size: 1.3em;
-  margin: 5px;
-}
-
-.alert-box .status {
-  display: inline-block;
-  border-radius: 5px;
-  width: 2.4em;
-  color: #ffffff;
-  font-size: 2em;
-}
-
-.alert-box.sea .status.on {
-  background-color: #5681a2;
-}
-
-.alert-box.land .status.on {
-  background-color: #ab6866;
-}
-
-.alert-box .status.off {
-  background-color: #595757;
-}
-
 .typhoon-info .title {
   margin-top: 0.5rem;
   margin-bottom: 4px;
