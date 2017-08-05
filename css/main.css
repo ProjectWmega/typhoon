@@ -231,6 +231,7 @@ h2.second-title {
 .typhoon-info .level {
   padding: 2px 3px;
   font-size: 15px;
+  border-radius: 4px;
 }
 
 .typhoon-info .level .level-text {
