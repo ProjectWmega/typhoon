@@ -252,7 +252,7 @@ const app = new Vue({
       });
 
       // typhoon eye
-      $('.eye circle').each((_, eye) => {
+      [].reverse.call($('.eye circle')).each((_, eye) => {
         const $this = $(eye);
 
         $this.data('original-r', $this.attr('r')).attr('r', 0);
