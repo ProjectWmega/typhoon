@@ -427,11 +427,6 @@
                 stroke-linecap="round" stroke-linejoin="round"></path>
         </g>
       </g>
-      <g class="eye">
-        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" :r="level7Radius" class="yellow transparent"></circle>
-        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" :r="level10Radius" class="red transparent"></circle>
-        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="5" class="brown"></circle>
-      </g>
       <g class="day" v-for="routesOfDate in fcstRoutesDays">
         <g class="route">
           <path v-for="route in routesOfDate.routes" :class="route.org" :d="route.d" v-show="routeSelector[route.org]"></path>
@@ -445,6 +440,11 @@
                   v-show="routeSelector[route.org]">
           </circle>
         </g>
+      </g>
+      <g class="eye">
+        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" :r="level7Radius" class="yellow transparent"></circle>
+        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" :r="level10Radius" class="red transparent"></circle>
+        <circle :cx="typhoonEye.x" :cy="typhoonEye.y" r="5" class="brown"></circle>
       </g>
     </svg>
   </div>
