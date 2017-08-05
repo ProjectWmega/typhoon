@@ -86,7 +86,7 @@ const app = new Vue({
     },
     routes: {
       cwb: '中央氣象局',
-      nmc: '中國氣象局',
+      nmc: '中國中央氣象台',
       hko: '香港天文台',
       jma: '日本氣象廳',
       jtwc: '美軍聯合颱風警報中心',
