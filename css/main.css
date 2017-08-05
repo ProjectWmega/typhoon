@@ -114,6 +114,18 @@ hr {
   background-color: #555;
 }
 
+.btn-minimize {
+  position: absolute;
+  left: -5%;
+  top: 50%;
+  height: 4em;
+  width: 2em;
+  background-color: rgba(180, 180, 180, .2);
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  outline: 0;
+}
+
 .info-box {
   display: none;
   position: fixed;
@@ -122,6 +134,11 @@ hr {
   z-index: 1;
   font-size: .8em;
   color: #595757;
+  transition: right .5s;
+}
+
+.info-box.out {
+  right: -28%;
 }
 
 .info-box .well {

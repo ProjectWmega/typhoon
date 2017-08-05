@@ -112,6 +112,7 @@ const app = new Vue({
     phointStyle: {
       display: 'none',
     },
+    hideInfoBox: false
   },
   computed: {
     updateTimeText() {

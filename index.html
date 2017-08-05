@@ -26,7 +26,10 @@
         </div>
       </div>
     </nav>
-    <div class="info-box">
+    <div :class="['info-box', {'out': hideInfoBox}]">
+      <button class="btn-minimize" @click="hideInfoBox = !hideInfoBox">
+        <i :class="['fa', {'fa-angle-right': !hideInfoBox}, {'fa-angle-left': hideInfoBox}]" aria-hidden="true"></i>
+      </button>
       <div class="info-title">
         <img src="img/exclamation-triangle.png" class="exclamation-triangle">
         <div class="table-cell headline">
